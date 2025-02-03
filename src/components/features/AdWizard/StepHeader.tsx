@@ -1,0 +1,39 @@
+'use client'
+
+interface StepHeaderProps {
+  currentStep: number
+  totalSteps: number
+  title: string
+  subtitle: string
+}
+
+export function StepHeader({
+  currentStep,
+  totalSteps,
+  title,
+  subtitle
+}: StepHeaderProps) {
+  const progress = (currentStep / totalSteps) * 100
+
+  return (
+    <div className="space-y-4">
+      <div className="space-y-1">
+        <div className="flex items-center justify-between text-sm text-[#1E2329]/70">
+          <span>Etapa {currentStep} de {totalSteps}</span>
+          <span>{Math.round(progress)}% Concluído</span>
+        </div>
+        <div className="h-2 w-full overflow-hidden rounded-full bg-[#E6E8EA]">
+          <div
+            className="h-full bg-[#125CC6] transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+
+      <div>
+        <h2 className="mb-1 text-lg font-medium text-[#1E2329]">{title}</h2>
+        <p className="text-sm text-[#1E2329]/70">{subtitle}</p>
+      </div>
+    </div>
+  )
+} 
