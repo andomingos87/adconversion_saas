@@ -12,7 +12,9 @@ import {
   Edit,
   Video,
   Film,
-  Users
+  Users,
+  Check,
+  X
 } from 'lucide-react'
 
 interface AdWizardProps {
@@ -26,15 +28,21 @@ type VideoStyle = 'ugc' | 'broll' | 'cinematic'
 type VideoFormat = 'landscape' | 'portrait'
 
 const mockHooks = [
-  'Problem-Solution',
-  'Before-After',
-  'Day in Life',
-  'Tutorial Style',
-  'Review Format',
-  'Comparison',
-  'Behind the Scenes',
-  'Quick Tips',
-  'Challenge-Based'
+  {
+    id: 1,
+    text: 'Problem-Solution',
+    description: 'Apresente um problema comum e mostre como seu produto resolve.'
+  },
+  {
+    id: 2,
+    text: 'Before-After',
+    description: 'Compare a vida antes e depois de usar seu produto.'
+  },
+  {
+    id: 3,
+    text: 'Day in Life',
+    description: 'Mostre como seu produto se encaixa na rotina diária.'
+  }
 ]
 
 const mockScripts = [
@@ -68,6 +76,39 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
   const [videoFormat, setVideoFormat] = useState<VideoFormat | null>(null)
   const [showCaptions, setShowCaptions] = useState(false)
   const [showAvatar, setShowAvatar] = useState(false)
+  const [editingHookId, setEditingHookId] = useState<number | null>(null)
+  const [editingText, setEditingText] = useState('')
+  
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<number | null>(null)
+
+  const handleEditHook = (hook: typeof mockHooks[0]) => {
+    setEditingHookId(hook.id)
+    setEditingText(hook.text)
+  }
+
+  const handleSaveHook = (id: number) => {
+    // Aqui você atualizaria no backend
+    // Por enquanto vamos apenas atualizar o estado local
+    const updatedHooks = mockHooks.map(hook => 
+      hook.id === id ? { ...hook, text: editingText } : hook
+    )
+    // Atualizar mockHooks (você precisará transformá-lo em um estado)
+    setEditingHookId(null)
+    setEditingText('')
+  }
+
+  const handleDeleteHook = (id: number) => {
+    // Aqui você deletaria no backend
+    // Por enquanto vamos apenas remover do estado local
+    const updatedHooks = mockHooks.filter(hook => hook.id !== id)
+    // Atualizar mockHooks
+    setShowDeleteConfirm(null)
+    
+    // Se o hook deletado estava selecionado, limpar seleção
+    if (selectedHooks.includes(mockHooks.find(h => h.id === id)?.text || '')) {
+      setSelectedHooks([])
+    }
+  }
 
   const steps = [
     {
@@ -109,54 +150,100 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       }
     },
     {
-      title: 'Escolha os Ganchos',
-      subtitle: 'Selecione 3 ganchos poderosos para capturar a atenção do seu público!',
+      title: 'Escolha o Gancho',
+      subtitle: 'Selecione a frase que melhor se conecta com seu público.',
       content: (
-        <div className="space-y-4">
-          <div className="grid gap-2">
+        <div className="space-y-6">
+          <div className="grid gap-4">
             {mockHooks.map((hook) => (
-              <button
-                key={hook}
-                onClick={() => {
-                  if (selectedHooks.includes(hook)) {
-                    setSelectedHooks(selectedHooks.filter(h => h !== hook))
-                  } else if (selectedHooks.length < 3) {
-                    setSelectedHooks([...selectedHooks, hook])
-                  }
-                }}
-                className={`flex items-center justify-between rounded-lg border p-3 text-sm transition-colors ${
-                  selectedHooks.includes(hook)
-                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
-                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
+              <div
+                key={hook.id}
+                className={`group relative w-full rounded-lg border p-4 transition-all hover:border-[#125CC6] hover:shadow-sm dark:hover:border-blue-500 ${
+                  selectedHooks.includes(hook.text)
+                    ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
+                    : 'border-[#E6E8EA] dark:border-gray-700'
                 }`}
-                disabled={selectedHooks.length >= 3 && !selectedHooks.includes(hook)}
               >
-                {hook}
-              </button>
+                {editingHookId === hook.id ? (
+                  <div className="flex items-start gap-4">
+                    <textarea
+                      value={editingText}
+                      onChange={(e) => setEditingText(e.target.value)}
+                      className="flex-1 resize-none rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                      rows={2}
+                      autoFocus
+                    />
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleSaveHook(hook.id)}
+                        className="rounded-full p-2 text-[#125CC6] hover:bg-[#125CC6]/10 dark:text-blue-400 dark:hover:bg-blue-500/20"
+                      >
+                        <Check className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingHookId(null)
+                          setEditingText('')
+                        }}
+                        className="rounded-full p-2 text-red-500 hover:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setSelectedHooks([hook.text])}
+                    className="flex w-full items-start justify-between gap-4"
+                  >
+                    <p className="flex-1 text-left text-sm text-[#1E2329] dark:text-gray-200">
+                      {hook.text}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleEditHook(hook)
+                        }}
+                        className="rounded-full p-2 text-[#1E2329]/50 hover:bg-[#125CC6]/10 hover:text-[#125CC6] dark:text-gray-400 dark:hover:bg-blue-500/20 dark:hover:text-blue-400"
+                      >
+                        <Edit className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setShowDeleteConfirm(hook.id)
+                        }}
+                        className="rounded-full p-2 text-[#1E2329]/50 hover:bg-[#125CC6]/10 hover:text-[#125CC6] dark:text-gray-400 dark:hover:bg-blue-500/20 dark:hover:text-blue-400"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </button>
+                )}
+              </div>
             ))}
           </div>
-          <div className="flex justify-end gap-2">
-            <button
-              onClick={() => setSelectedHooks([])}
-              className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-3 py-2 text-sm text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6] dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
-            >
-              <Trash2 className="h-4 w-4" />
-              Limpar
-            </button>
-            <button
-              onClick={() => {
-                const shuffled = [...mockHooks].sort(() => Math.random() - 0.5)
-                setSelectedHooks(shuffled.slice(0, 3))
-              }}
-              className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-3 py-2 text-sm text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6] dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
-            >
-              <RefreshCw className="h-4 w-4" />
-              Gerar Novos
-            </button>
-          </div>
+
+          {mockHooks.length === 0 && (
+            <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-dashed border-[#E6E8EA] p-8 dark:border-gray-700">
+              <RefreshCw className="h-8 w-8 text-[#1E2329]/50 dark:text-gray-400" />
+              <div className="text-center">
+                <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+                  Nenhuma frase disponível
+                </p>
+                <button
+                  onClick={() => {/* Função para gerar novas frases */}}
+                  className="mt-2 text-sm font-medium text-[#125CC6] hover:underline dark:text-blue-400"
+                >
+                  Gerar novas frases
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       ),
-      isValid: () => selectedHooks.length === 3
+      isValid: () => selectedHooks.length === 1
     },
     {
       title: 'Selecione o Script',
@@ -406,6 +493,34 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
           </button>
         </div>
       </div>
+
+      {/* Modal de Confirmação de Exclusão */}
+      <Modal
+        isOpen={!!showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(null)}
+        title="Confirmar Exclusão"
+        containerClassName="max-w-md"
+      >
+        <div className="space-y-4">
+          <p className="text-[#1E2329] dark:text-white">
+            Tem certeza que deseja excluir esta frase?
+          </p>
+          <div className="flex justify-end gap-3 pt-4">
+            <button
+              onClick={() => setShowDeleteConfirm(null)}
+              className="rounded-lg border border-[#E6E8EA] px-4 py-2 text-sm text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6] dark:border-gray-700 dark:text-gray-200"
+            >
+              Cancelar
+            </button>
+            <button
+              onClick={() => showDeleteConfirm && handleDeleteHook(showDeleteConfirm)}
+              className="rounded-lg bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-600"
+            >
+              Excluir
+            </button>
+          </div>
+        </div>
+      </Modal>
     </Modal>
   )
 } 
