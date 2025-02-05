@@ -79,7 +79,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
             placeholder="Descreva seu produto..."
-            className="h-32 w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
+            className="h-32 w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
           />
         </div>
       ),
@@ -95,7 +95,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             value={landingPage}
             onChange={(e) => setLandingPage(e.target.value)}
             placeholder="Digite a URL da landing page..."
-            className="w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
+            className="w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
           />
         </div>
       ),
@@ -211,8 +211,8 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             onClick={() => setVideoStyle('ugc')}
             className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
               videoStyle === 'ugc'
-                ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
-                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
+                ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
@@ -228,8 +228,8 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             onClick={() => setVideoStyle('broll')}
             className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
               videoStyle === 'broll'
-                ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
-                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
+                ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
@@ -245,8 +245,8 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             onClick={() => setVideoStyle('cinematic')}
             className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
               videoStyle === 'cinematic'
-                ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
-                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
+                ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
@@ -254,7 +254,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             </div>
             <div>
               <h3 className="mb-1 font-medium text-[#1E2329] dark:text-white">CINEMATIC</h3>
-              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">Apenas Vídeo Stock</p>
+              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">Vídeo Stock Premium</p>
             </div>
           </button>
         </div>
@@ -266,27 +266,25 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       subtitle: 'Configure os detalhes finais do seu vídeo.',
       content: (
         <div className="space-y-6">
-          <div>
-            <label className="mb-2 block text-sm font-medium text-[#1E2329]">
-              Formato do Vídeo
-            </label>
-            <div className="grid gap-3 md:grid-cols-2">
+          <div className="mt-8 space-y-4">
+            <h3 className="font-medium text-[#1E2329] dark:text-white">Formato do Vídeo</h3>
+            <div className="flex gap-4">
               <button
                 onClick={() => setVideoFormat('landscape')}
-                className={`flex items-center justify-center rounded-lg border p-3 text-sm transition-colors ${
+                className={`flex flex-1 items-center justify-center gap-2 rounded-lg border p-3 text-sm transition-colors ${
                   videoFormat === 'landscape'
-                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6]'
-                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5'
+                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
                 }`}
               >
                 Paisagem (16:9)
               </button>
               <button
                 onClick={() => setVideoFormat('portrait')}
-                className={`flex items-center justify-center rounded-lg border p-3 text-sm transition-colors ${
+                className={`flex flex-1 items-center justify-center gap-2 rounded-lg border p-3 text-sm transition-colors ${
                   videoFormat === 'portrait'
-                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6]'
-                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5'
+                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
                 }`}
               >
                 Retrato (9:16)
@@ -294,41 +292,27 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             </div>
           </div>
 
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-[#1E2329]">
-                Mostrar Legendas
-              </label>
-              <button
-                onClick={() => setShowCaptions(!showCaptions)}
-                className={`relative h-6 w-11 rounded-full transition-colors ${
-                  showCaptions ? 'bg-[#125CC6]' : 'bg-[#E6E8EA]'
-                }`}
-              >
-                <span
-                  className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${
-                    showCaptions ? 'translate-x-5' : ''
-                  }`}
+          <div className="mt-8 space-y-4">
+            <h3 className="font-medium text-[#1E2329] dark:text-white">Opções Adicionais</h3>
+            <div className="space-y-3">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={showCaptions}
+                  onChange={(e) => setShowCaptions(e.target.checked)}
+                  className="h-4 w-4 rounded border-gray-300 text-[#125CC6] focus:ring-[#125CC6] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-500"
                 />
-              </button>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-[#1E2329]">
-                Mostrar Avatar
+                <span className="text-sm text-[#1E2329] dark:text-gray-200">Adicionar Legendas</span>
               </label>
-              <button
-                onClick={() => setShowAvatar(!showAvatar)}
-                className={`relative h-6 w-11 rounded-full transition-colors ${
-                  showAvatar ? 'bg-[#125CC6]' : 'bg-[#E6E8EA]'
-                }`}
-              >
-                <span
-                  className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${
-                    showAvatar ? 'translate-x-5' : ''
-                  }`}
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={showAvatar}
+                  onChange={(e) => setShowAvatar(e.target.checked)}
+                  className="h-4 w-4 rounded border-gray-300 text-[#125CC6] focus:ring-[#125CC6] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-500"
                 />
-              </button>
+                <span className="text-sm text-[#1E2329] dark:text-gray-200">Mostrar Avatar</span>
+              </label>
             </div>
           </div>
         </div>
@@ -353,76 +337,63 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
   }
 
   const currentStepData = steps[currentStep - 1]
-  const canProceed = currentStepData.isValid()
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} title={`Novo Anúncio - ${projectName}`}>
-      <div className="space-y-6">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      containerClassName="max-w-3xl"
+      title={`Novo Anúncio - ${projectName}`}
+    >
+      <div className="space-y-8">
         <StepHeader
           currentStep={currentStep}
           totalSteps={steps.length}
-          title={currentStepData.title}
-          subtitle={currentStepData.subtitle}
+          title={steps[currentStep - 1].title}
+          subtitle={steps[currentStep - 1].subtitle}
         />
 
-        <div className="relative overflow-hidden">
-          <AnimatePresence initial={false} mode="wait" custom={direction}>
-            <motion.div
-              key={currentStep}
-              custom={direction}
-              variants={{
-                enter: (direction: number) => ({
-                  x: direction > 0 ? 200 : -200,
-                  opacity: 0
-                }),
-                center: {
-                  zIndex: 1,
-                  x: 0,
-                  opacity: 1
-                },
-                exit: (direction: number) => ({
-                  zIndex: 0,
-                  x: direction < 0 ? 200 : -200,
-                  opacity: 0
-                })
-              }}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 }
-              }}
-            >
-              {currentStepData.content}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={currentStep}
+            initial={{ x: 10 * direction, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -10 * direction, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="min-h-[300px]"
+          >
+            {steps[currentStep - 1].content}
+          </motion.div>
+        </AnimatePresence>
 
-        <div className="flex justify-between">
+        <div className="flex items-center justify-between pt-4">
           <button
             onClick={() => {
               setDirection(-1)
-              setCurrentStep(currentStep - 1)
+              setCurrentStep((prev) => prev - 1)
             }}
             disabled={currentStep === 1}
-            className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-4 py-2 text-sm font-medium text-[#1E2329] transition-colors hover:border-[#125CC6] hover:text-[#125CC6] disabled:opacity-50"
+            className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-4 py-2 text-sm text-[#1E2329] transition-colors hover:border-[#125CC6] hover:text-[#125CC6] disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
           >
             <ArrowLeft className="h-4 w-4" />
-            Voltar
+            Anterior
           </button>
 
           <button
             onClick={() => {
               if (currentStep === steps.length) {
                 handleClose()
-              } else {
-                setDirection(1)
-                setCurrentStep(currentStep + 1)
+                return
               }
+              setDirection(1)
+              setCurrentStep((prev) => prev + 1)
             }}
-            disabled={!canProceed}
-            className="flex items-center gap-2 rounded-lg bg-[#125CC6] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#125CC6]/90 disabled:opacity-50"
+            disabled={!steps[currentStep - 1].isValid()}
+            className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              currentStep === steps.length
+                ? 'bg-[#125CC6] text-white hover:bg-[#125CC6]/90 dark:bg-blue-500 dark:hover:bg-blue-600'
+                : 'border border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6] dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-400'
+            } disabled:cursor-not-allowed disabled:opacity-50`}
           >
             {currentStep === steps.length ? (
               'Finalizar'

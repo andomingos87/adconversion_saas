@@ -2,8 +2,10 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Home, Layout, FolderOpen, HelpCircle, BookOpen, LogOut } from 'lucide-react'
+import { createBrowserClient } from '@supabase/ssr'
+import { useAuth } from '@/contexts/AuthContext'
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
@@ -15,6 +17,22 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+
+  const handleSignOut = async () => {
+    try {
+      await supabase.auth.signOut()
+      router.push('/auth/signin')
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error)
+    }
+  }
 
   return (
     <aside className="fixed left-0 top-0 z-40 h-screen w-60 border-r border-[#E6E8EA] bg-white transition-colors duration-300 dark:border-gray-700/80 dark:bg-gray-800/95">
@@ -60,12 +78,15 @@ export function Sidebar() {
           </nav>
         </div>
 
-        <button
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#1E2329] transition-colors hover:bg-[#F7F8FA] dark:text-gray-100 dark:hover:bg-gray-700/70"
-        >
-          <LogOut className="h-5 w-5" />
-          Sign Out
-        </button>
+        {user && (
+          <button
+            onClick={handleSignOut}
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#1E2329] transition-colors hover:bg-[#F7F8FA] dark:text-gray-100 dark:hover:bg-gray-700/70"
+          >
+            <LogOut className="h-5 w-5" />
+            Sair
+          </button>
+        )}
       </div>
     </aside>
   )

@@ -4,8 +4,10 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useTheme } from '@/contexts/ThemeContext'
-import { mockUser } from '@/data/user'
+import { createBrowserClient } from '@supabase/ssr'
+import { useAuth } from '@/contexts/AuthContext'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -13,6 +15,22 @@ function classNames(...classes: string[]) {
 
 export function UserMenu() {
   const { theme, toggleTheme } = useTheme()
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+
+  const handleSignOut = async () => {
+    try {
+      await supabase.auth.signOut()
+      router.push('/auth/signin')
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error)
+    }
+  }
 
   return (
     <Menu as="div" className="relative ml-3">
@@ -21,8 +39,8 @@ export function UserMenu() {
           <span className="sr-only">Abrir menu do usuário</span>
           <Image
             className="h-8 w-8 rounded-full ring-2 ring-transparent transition-all duration-200 hover:ring-blue-500 dark:hover:ring-blue-400"
-            src={mockUser.avatar}
-            alt=""
+            src={user?.user_metadata?.avatar_url || '/avatar-placeholder.png'}
+            alt={user?.email || ''}
             width={32}
             height={32}
           />
@@ -67,10 +85,7 @@ export function UserMenu() {
           <Menu.Item>
             {({ active }) => (
               <button
-                onClick={() => {
-                  // TODO: Implementar logout
-                  console.log('Logout')
-                }}
+                onClick={handleSignOut}
                 className={classNames(
                   active ? 'bg-gray-100 dark:bg-gray-700/70' : '',
                   'block w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-200'

@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { HelpCircle, Plus } from 'lucide-react'
 import { ProjectSelectionModal } from '@/components/features/ProjectSelectionModal'
 import { AdWizard } from '@/components/features/AdWizard'
 import { Project } from '@/types/project'
 import { UserMenu } from './UserMenu'
+import { useAuth } from '@/contexts/AuthContext'
 
 export function Header() {
   const [showProjectSelection, setShowProjectSelection] = useState(false)
@@ -16,6 +18,8 @@ export function Header() {
     language?: string
     platform?: string
   } | null>(null)
+
+  const { user, loading } = useAuth()
 
   const handleProjectSelect = (
     project: Project | null,
@@ -43,17 +47,37 @@ export function Header() {
               <HelpCircle className="h-6 w-6" />
             </button>
 
-            <button
-              className="flex items-center gap-2 rounded-lg bg-[#125CC6] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#125CC6]/90 dark:bg-blue-500 dark:hover:bg-blue-600"
-              onClick={() => setShowProjectSelection(true)}
-            >
-              <Plus className="h-5 w-5" />
-              Gerar Novo Anúncio
-            </button>
+            {!loading && (
+              user ? (
+                <>
+                  <button
+                    className="flex items-center gap-2 rounded-lg bg-[#125CC6] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#125CC6]/90 dark:bg-blue-500 dark:hover:bg-blue-600"
+                    onClick={() => setShowProjectSelection(true)}
+                  >
+                    <Plus className="h-5 w-5" />
+                    Gerar Novo Anúncio
+                  </button>
 
-            <div className="relative z-50">
-              <UserMenu />
-            </div>
+                  <div className="flex items-center gap-4">
+                    <span className="hidden text-sm text-gray-700 dark:text-gray-300 lg:block">
+                      {user.user_metadata.name && (
+                        <span className="max-w-[200px] truncate">{user.user_metadata.name}</span>
+                      )}
+                    </span>
+                    <div className="relative z-50">
+                      <UserMenu />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <Link
+                  href="/auth/signin"
+                  className="flex items-center gap-2 rounded-lg bg-[#125CC6] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#125CC6]/90 dark:bg-blue-500 dark:hover:bg-blue-600"
+                >
+                  Entrar
+                </Link>
+              )
+            )}
           </div>
         </div>
       </header>

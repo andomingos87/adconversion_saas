@@ -90,7 +90,7 @@ export function ProjectSelectionModal({
                   className={`flex cursor-pointer items-center gap-4 rounded-lg border p-4 transition-colors ${
                     selectedProject?.id === project.id
                       ? 'border-[#125CC6] bg-[#125CC6]/5'
-                      : 'border-[#E6E8EA] hover:border-[#125CC6]'
+                      : 'border-[#E6E8EA] dark:border-gray-700 hover:border-[#125CC6]'
                   }`}
                   onClick={() => setSelectedProject(project)}
                 >
@@ -103,8 +103,8 @@ export function ProjectSelectionModal({
                     />
                   </div>
                   <div>
-                    <h3 className="font-medium text-[#1E2329]">{project.name}</h3>
-                    <p className="text-sm text-[#1E2329]/70">
+                    <h3 className="font-medium text-[#1E2329] dark:text-gray-200">{project.name}</h3>
+                    <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
                       {project.videoCount} vídeos
                     </p>
                   </div>
@@ -115,15 +115,16 @@ export function ProjectSelectionModal({
             <div className="flex items-center justify-between">
               <Button
                 variant="secondary"
+                className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
                 onClick={() => setStep('create')}
               >
-                <Plus className="mr-2 h-4 w-4" />
-                Criar Novo Projeto
+               +  Criar Novo Projeto
               </Button>
 
               <Button
                 onClick={handleNext}
                 disabled={!selectedProject}
+                className="bg-[#125CC6] text-white hover:bg-[#125CC6]/90 dark:bg-[#125CC6] dark:hover:bg-[#125CC6]/80 disabled:bg-gray-300 dark:disabled:bg-gray-700"
               >
                 Continuar
               </Button>
@@ -135,7 +136,7 @@ export function ProjectSelectionModal({
           <>
             <div className="space-y-4">
               <div>
-                <label className="mb-2 block text-sm font-medium text-[#1E2329]">
+                <label className="mb-2 block text-sm font-medium text-[#1E2329] dark:text-gray-200">
                   Nome do Projeto
                 </label>
                 <input
@@ -143,14 +144,15 @@ export function ProjectSelectionModal({
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   placeholder="Digite o nome do projeto..."
-                  className="w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder-[#1E2329]/50 outline-none focus:border-[#125CC6]"
+                  className="w-full rounded-lg border border-[#E6E8EA] dark:border-gray-700 bg-white dark:bg-gray-800 p-3 text-sm text-[#1E2329] dark:text-gray-200 placeholder-[#1E2329]/50 dark:placeholder-gray-400 outline-none focus:border-[#125CC6]"
                 />
               </div>
             </div>
 
             <div className="flex items-center justify-between">
               <Button
-                variant="secondary"
+                variant="secondary" 
+                className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
                 onClick={() => setStep('select')}
               >
                 Voltar
@@ -159,6 +161,7 @@ export function ProjectSelectionModal({
               <Button
                 onClick={handleNext}
                 disabled={!projectName.trim()}
+                className="bg-[#125CC6] text-white hover:bg-[#125CC6]/90 dark:bg-[#125CC6] dark:hover:bg-[#125CC6]/80 disabled:bg-gray-300 dark:disabled:bg-gray-700"
               >
                 Continuar
               </Button>
@@ -174,7 +177,7 @@ export function ProjectSelectionModal({
                 className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
                   platform === 'meta'
                     ? 'border-[#125CC6] bg-[#125CC6]/5'
-                    : 'border-[#E6E8EA] hover:border-[#125CC6]'
+                    : 'border-[#E6E8EA] dark:border-gray-700 hover:border-[#125CC6]'
                 }`}
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10">
@@ -186,8 +189,8 @@ export function ProjectSelectionModal({
                   />
                 </div>
                 <div>
-                  <h3 className="font-medium text-[#1E2329]">Meta</h3>
-                  <p className="text-sm text-[#1E2329]/70">
+                  <h3 className="font-medium text-[#1E2329] dark:text-gray-200">Meta</h3>
+                  <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
                     Facebook e Instagram
                   </p>
                 </div>
@@ -198,7 +201,7 @@ export function ProjectSelectionModal({
                 className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
                   platform === 'youtube'
                     ? 'border-[#125CC6] bg-[#125CC6]/5'
-                    : 'border-[#E6E8EA] hover:border-[#125CC6]'
+                    : 'border-[#E6E8EA] dark:border-gray-700 hover:border-[#125CC6]'
                 }`}
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10">
@@ -210,8 +213,8 @@ export function ProjectSelectionModal({
                   />
                 </div>
                 <div>
-                  <h3 className="font-medium text-[#1E2329]">YouTube</h3>
-                  <p className="text-sm text-[#1E2329]/70">
+                  <h3 className="font-medium text-[#1E2329] dark:text-gray-200">YouTube</h3>
+                  <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
                     YouTube Shorts e Ads
                   </p>
                 </div>
@@ -221,9 +224,11 @@ export function ProjectSelectionModal({
             <div className="flex items-center justify-between">
               <Button
                 variant="secondary"
+                className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
                 onClick={() => setStep('select')}
               >
                 Voltar
+
               </Button>
 
               <Button
@@ -244,7 +249,7 @@ export function ProjectSelectionModal({
                 className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
                   language === 'pt-BR'
                     ? 'border-[#125CC6] bg-[#125CC6]/5'
-                    : 'border-[#E6E8EA] hover:border-[#125CC6]'
+                    : 'border-[#E6E8EA] dark:border-gray-700 hover:border-[#125CC6]'
                 }`}
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10">
@@ -256,8 +261,8 @@ export function ProjectSelectionModal({
                   />
                 </div>
                 <div>
-                  <h3 className="font-medium text-[#1E2329]">Português</h3>
-                  <p className="text-sm text-[#1E2329]/70">
+                  <h3 className="font-medium text-[#1E2329] dark:text-gray-200">Português</h3>
+                  <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
                     Português do Brasil
                   </p>
                 </div>
@@ -268,7 +273,7 @@ export function ProjectSelectionModal({
                 className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
                   language === 'en'
                     ? 'border-[#125CC6] bg-[#125CC6]/5'
-                    : 'border-[#E6E8EA] hover:border-[#125CC6]'
+                    : 'border-[#E6E8EA] dark:border-gray-700 hover:border-[#125CC6]'
                 }`}
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10">
@@ -280,8 +285,8 @@ export function ProjectSelectionModal({
                   />
                 </div>
                 <div>
-                  <h3 className="font-medium text-[#1E2329]">English</h3>
-                  <p className="text-sm text-[#1E2329]/70">
+                  <h3 className="font-medium text-[#1E2329] dark:text-gray-200">English</h3>
+                  <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
                     American English
                   </p>
                 </div>
