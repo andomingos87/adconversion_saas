@@ -79,7 +79,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
             placeholder="Descreva seu produto..."
-            className="h-32 w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder-[#1E2329]/50 outline-none focus:border-[#125CC6]"
+            className="h-32 w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
           />
         </div>
       ),
@@ -95,7 +95,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             value={landingPage}
             onChange={(e) => setLandingPage(e.target.value)}
             placeholder="Digite a URL da landing page..."
-            className="w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder-[#1E2329]/50 outline-none focus:border-[#125CC6]"
+            className="w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
           />
         </div>
       ),
@@ -126,8 +126,8 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
                 }}
                 className={`flex items-center justify-between rounded-lg border p-3 text-sm transition-colors ${
                   selectedHooks.includes(hook)
-                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6]'
-                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5'
+                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
                 }`}
                 disabled={selectedHooks.length >= 3 && !selectedHooks.includes(hook)}
               >
@@ -138,7 +138,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
           <div className="flex justify-end gap-2">
             <button
               onClick={() => setSelectedHooks([])}
-              className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-3 py-2 text-sm text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6]"
+              className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-3 py-2 text-sm text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6] dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
             >
               <Trash2 className="h-4 w-4" />
               Limpar
@@ -148,7 +148,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
                 const shuffled = [...mockHooks].sort(() => Math.random() - 0.5)
                 setSelectedHooks(shuffled.slice(0, 3))
               }}
-              className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-3 py-2 text-sm text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6]"
+              className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-3 py-2 text-sm text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6] dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
             >
               <RefreshCw className="h-4 w-4" />
               Gerar Novos
@@ -169,28 +169,28 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
                 key={script.id}
                 className={`rounded-lg border p-4 transition-colors ${
                   selectedScript === script.id
-                    ? 'border-[#125CC6] bg-[#125CC6]/5'
-                    : 'border-[#E6E8EA]'
+                    ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
+                    : 'border-[#E6E8EA] dark:border-gray-700'
                 }`}
               >
                 <div className="mb-3 flex items-center justify-between">
-                  <h3 className="font-medium text-[#1E2329]">{script.title}</h3>
+                  <h3 className="font-medium text-[#1E2329] dark:text-white">{script.title}</h3>
                   <div className="flex gap-2">
-                    <button className="text-[#1E2329]/70 hover:text-[#125CC6]">
+                    <button className="text-[#1E2329]/70 hover:text-[#125CC6] dark:text-gray-400 dark:hover:text-blue-400">
                       <Edit className="h-4 w-4" />
                     </button>
-                    <button className="text-[#1E2329]/70 hover:text-[#125CC6]">
+                    <button className="text-[#1E2329]/70 hover:text-[#125CC6] dark:text-gray-400 dark:hover:text-blue-400">
                       <RefreshCw className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
-                <p className="mb-4 text-sm text-[#1E2329]/70">{script.content}</p>
+                <p className="mb-4 text-sm text-[#1E2329]/70 dark:text-gray-400">{script.content}</p>
                 <button
                   onClick={() => setSelectedScript(script.id)}
                   className={`w-full rounded-lg border p-2 text-sm transition-colors ${
                     selectedScript === script.id
-                      ? 'border-[#125CC6] bg-white text-[#125CC6]'
-                      : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6]'
+                      ? 'border-[#125CC6] bg-white text-[#125CC6] dark:border-blue-500 dark:bg-gray-800 dark:text-blue-400'
+                      : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500'
                   }`}
                 >
                   {selectedScript === script.id ? 'Selecionado' : 'Selecionar'}
@@ -211,16 +211,16 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             onClick={() => setVideoStyle('ugc')}
             className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
               videoStyle === 'ugc'
-                ? 'border-[#125CC6] bg-[#125CC6]/5'
-                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5'
+                ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
+                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10">
-              <Users className="h-6 w-6 text-[#125CC6]" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
+              <Users className="h-6 w-6 text-[#125CC6] dark:text-blue-400" />
             </div>
             <div>
-              <h3 className="mb-1 font-medium text-[#1E2329]">UGC</h3>
-              <p className="text-sm text-[#1E2329]/70">Apenas Avatar IA</p>
+              <h3 className="mb-1 font-medium text-[#1E2329] dark:text-white">UGC</h3>
+              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">Apenas Avatar IA</p>
             </div>
           </button>
 
@@ -228,16 +228,16 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             onClick={() => setVideoStyle('broll')}
             className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
               videoStyle === 'broll'
-                ? 'border-[#125CC6] bg-[#125CC6]/5'
-                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5'
+                ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
+                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10">
-              <Video className="h-6 w-6 text-[#125CC6]" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
+              <Video className="h-6 w-6 text-[#125CC6] dark:text-blue-400" />
             </div>
             <div>
-              <h3 className="mb-1 font-medium text-[#1E2329]">B-ROLL</h3>
-              <p className="text-sm text-[#1E2329]/70">Avatar + Vídeo Stock</p>
+              <h3 className="mb-1 font-medium text-[#1E2329] dark:text-white">B-ROLL</h3>
+              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">Avatar + Vídeo Stock</p>
             </div>
           </button>
 
@@ -245,16 +245,16 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
             onClick={() => setVideoStyle('cinematic')}
             className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
               videoStyle === 'cinematic'
-                ? 'border-[#125CC6] bg-[#125CC6]/5'
-                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5'
+                ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
+                : 'border-[#E6E8EA] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10">
-              <Film className="h-6 w-6 text-[#125CC6]" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
+              <Film className="h-6 w-6 text-[#125CC6] dark:text-blue-400" />
             </div>
             <div>
-              <h3 className="mb-1 font-medium text-[#1E2329]">CINEMATIC</h3>
-              <p className="text-sm text-[#1E2329]/70">Apenas Vídeo Stock</p>
+              <h3 className="mb-1 font-medium text-[#1E2329] dark:text-white">CINEMATIC</h3>
+              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">Apenas Vídeo Stock</p>
             </div>
           </button>
         </div>

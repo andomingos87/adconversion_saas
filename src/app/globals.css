@@ -2,6 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* Container Base Classes */
+  .container-base {
+    @apply rounded-lg border border-[#E6E8EA] bg-white transition-colors duration-300 dark:border-gray-700 dark:bg-gray-800;
+  }
+
+  .container-gray {
+    @apply rounded-lg border border-[#E6E8EA] bg-gray-50 transition-colors duration-300 dark:border-gray-700 dark:bg-gray-900;
+  }
+
+  .container-hover {
+    @apply hover:bg-[#E6E8EA] dark:hover:bg-gray-700;
+  }
+
+  .container-interactive {
+    @apply container-base container-hover cursor-pointer;
+  }
+
+  /* Text Base Classes */
+  .text-primary {
+    @apply text-[#1E2329] dark:text-white;
+  }
+
+  .text-secondary {
+    @apply text-[#1E2329]/70 dark:text-gray-400;
+  }
+
+  /* Input Base Classes */
+  .input-base {
+    @apply rounded-lg border border-[#E6E8EA] bg-white px-3 py-2 outline-none transition-colors duration-300
+    text-[#1E2329] placeholder-[#1E2329]/50
+    focus:border-[#125CC6]
+    dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400;
+  }
+
+  /* Card Shadow Effects */
+  .shadow-hover {
+    @apply transition-all duration-300 hover:shadow-lg dark:hover:shadow-lg dark:hover:shadow-black/10;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

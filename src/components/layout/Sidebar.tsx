@@ -17,21 +17,26 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed left-0 top-0 z-40 h-screen w-60 border-r border-[#E6E8EA] bg-white">
+    <aside className="fixed left-0 top-0 z-40 h-screen w-60 border-r border-[#E6E8EA] bg-white transition-colors duration-300 dark:border-gray-700/80 dark:bg-gray-800/95">
       <div className="flex h-full flex-col justify-between p-4">
         <div className="space-y-8">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative h-8">
-              <Image
-                src="/logo-adconversion.png"
-                alt="AdConversion Logo"
-                width={140}
-                height={32}
-                priority
-                className="object-contain"
-              />
-            </div>
-          </Link>
+          <div className="p-4">
+            <Image
+              src="/logo-adconversion-dark.png"
+              alt="Logo"
+              width={150}
+              height={40}
+              className="block dark:hidden"
+
+            />
+            <Image
+              src="/logo-adconversion-light.png"
+              alt="Logo"
+              width={150}
+              height={40}
+              className="hidden dark:block"
+            />
+          </div>
 
           <nav className="space-y-1">
             {navigation.map((item) => {
@@ -43,8 +48,8 @@ export function Sidebar() {
                   href={item.href}
                   className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-[#125CC6] text-white'
-                      : 'text-[#1E2329] hover:bg-[#F7F8FA]'
+                      ? 'bg-[#125CC6] text-white dark:bg-blue-600 dark:text-gray-50'
+                      : 'text-[#1E2329] hover:bg-[#F7F8FA] dark:text-gray-100 dark:hover:bg-gray-700/70'
                   }`}
                 >
                   <Icon className="h-5 w-5" />
@@ -56,7 +61,7 @@ export function Sidebar() {
         </div>
 
         <button
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#1E2329] hover:bg-[#F7F8FA]"
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#1E2329] transition-colors hover:bg-[#F7F8FA] dark:text-gray-100 dark:hover:bg-gray-700/70"
         >
           <LogOut className="h-5 w-5" />
           Sign Out

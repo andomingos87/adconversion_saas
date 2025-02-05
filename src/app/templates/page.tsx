@@ -19,9 +19,9 @@ export default function Templates() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold text-[#1E2329]">Video Templates</h1>
-        <p className="mt-1 text-[#1E2329]/70">
-          Choose a template to create your video ad
+        <h1 className="text-2xl font-semibold text-[#1E2329] dark:text-white">Templates de Vídeo</h1>
+        <p className="mt-1 text-[#1E2329]/70 dark:text-gray-400">
+          Escolha um template para criar seu anúncio em vídeo
         </p>
       </div>
 

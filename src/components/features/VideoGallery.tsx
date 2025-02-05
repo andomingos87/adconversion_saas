@@ -16,7 +16,7 @@ export function VideoGallery({ projectName, videos }: VideoGalleryProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-medium text-[#1E2329]">
+        <h2 className="text-lg font-medium text-[#1E2329] dark:text-white">
           Vídeos de {projectName}
         </h2>
       </div>
@@ -25,7 +25,7 @@ export function VideoGallery({ projectName, videos }: VideoGalleryProps) {
         {videos.map((video) => (
           <div
             key={video.id}
-            className="group relative cursor-pointer rounded-lg border border-[#E6E8EA] bg-white p-3 transition-colors hover:border-[#125CC6]"
+            className="group relative cursor-pointer rounded-lg border border-[#E6E8EA] bg-white p-3 transition-colors hover:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800"
           >
             <div className="relative mb-3 aspect-video overflow-hidden rounded-lg">
               <Image
@@ -38,8 +38,8 @@ export function VideoGallery({ projectName, videos }: VideoGalleryProps) {
 
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="mb-1 font-medium text-[#1E2329]">{video.title}</h3>
-                <p className="text-sm text-[#1E2329]/70">
+                <h3 className="mb-1 font-medium text-[#1E2329] dark:text-white">{video.title}</h3>
+                <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
                   {new Date(video.createdAt).toLocaleDateString('pt-BR')}
                 </p>
               </div>
@@ -50,21 +50,21 @@ export function VideoGallery({ projectName, videos }: VideoGalleryProps) {
                     e.stopPropagation()
                     setShowMenu(showMenu === video.id ? null : video.id)
                   }}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg text-[#1E2329]/70 hover:bg-[#E6E8EA] hover:text-[#1E2329]"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg text-[#1E2329]/70 hover:bg-[#E6E8EA] hover:text-[#1E2329] dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   <MoreVertical className="h-4 w-4" />
                 </button>
 
                 {showMenu === video.id && (
                   <div
-                    className="fixed right-0 top-full z-50 mt-1 w-36 overflow-hidden rounded-lg border border-[#E6E8EA] bg-white py-1 shadow-lg"
+                    className="fixed right-0 top-full z-50 mt-1 w-36 overflow-hidden rounded-lg border border-[#E6E8EA] bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-[#1E2329] hover:bg-[#E6E8EA]">
+                    <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-[#1E2329] hover:bg-[#E6E8EA] dark:text-white dark:hover:bg-gray-700">
                       <Pencil className="h-3.5 w-3.5" />
                       Renomear
                     </button>
-                    <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-500 hover:bg-[#E6E8EA]">
+                    <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-500 hover:bg-[#E6E8EA] dark:text-red-400 dark:hover:bg-gray-700">
                       <Trash className="h-3.5 w-3.5" />
                       Excluir
                     </button>

@@ -37,7 +37,7 @@ export default function ProfilePage() {
   ]
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 container-base">
       <div className="mb-8 flex items-center space-x-4">
         <div className="group relative">
           <div className="overflow-hidden rounded-full ring-2 ring-gray-200 transition-all duration-200 group-hover:ring-blue-500 dark:ring-gray-700 dark:group-hover:ring-blue-400">
@@ -65,15 +65,15 @@ export default function ProfilePage() {
           />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-2xl font-bold text-primary">
             {user.name}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">{user.email}</p>
+          <p className="text-secondary">{user.email}</p>
         </div>
       </div>
 
       <Tab.Group selectedIndex={selectedTab} onChange={setSelectedTab}>
-        <Tab.List className="mb-8 flex space-x-1 rounded-xl bg-white p-1 shadow-sm ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700">
+        <Tab.List className="mb-8 flex space-x-1 container-base p-1 shadow-sm">
           {tabs.map((tab) => (
             <Tab
               key={tab.name}
@@ -83,7 +83,7 @@ export default function ProfilePage() {
                   'focus:outline-none',
                   selected
                     ? 'bg-blue-600 text-white shadow dark:bg-blue-500'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-gray-200'
+                    : 'text-secondary container-hover'
                 )
               }
             >
@@ -95,10 +95,7 @@ export default function ProfilePage() {
           {tabs.map((tab, idx) => (
             <Tab.Panel
               key={idx}
-              className={classNames(
-                'rounded-xl bg-white shadow-sm ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700',
-                'p-6 transition-all duration-200'
-              )}
+              className="container-base p-6 transition-all duration-200"
             >
               {tab.content}
             </Tab.Panel>
@@ -113,48 +110,48 @@ function PersonalDataTab({ user }: { user: typeof mockUser }) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <h3 className="text-lg font-medium text-primary">
           Informações Básicas
         </h3>
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block text-sm font-medium text-secondary">
               Nome
             </label>
             <input
               type="text"
               defaultValue={user.name}
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+              className="input-base mt-1 block w-full dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block text-sm font-medium text-secondary">
               Email
             </label>
             <input
               type="email"
               defaultValue={user.email}
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+              className="input-base mt-1 block w-full dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block text-sm font-medium text-secondary">
               Telefone
             </label>
             <input
               type="tel"
               defaultValue={user.phone}
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+              className="input-base mt-1 block w-full dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block text-sm font-medium text-secondary">
               Empresa
             </label>
             <input
               type="text"
               defaultValue={user.company}
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+              className="input-base mt-1 block w-full dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
             />
           </div>
         </div>
@@ -172,16 +169,16 @@ function PlanAndPaymentsTab({ user }: { user: typeof mockUser }) {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <h3 className="text-lg font-medium text-primary">
           Seu Plano Atual
         </h3>
-        <div className="mt-4 rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 dark:border-gray-700 dark:bg-gray-800/50">
+        <div className="container-base mt-4 p-6 dark:bg-gray-800 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h4 className="text-xl font-semibold text-primary dark:text-white">
                 {user.plan.name}
               </h4>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-secondary dark:text-gray-300">
                 R$ {user.plan.price.toFixed(2)}/mês
               </p>
             </div>
@@ -190,7 +187,7 @@ function PlanAndPaymentsTab({ user }: { user: typeof mockUser }) {
             </button>
           </div>
           <div className="mt-4">
-            <h5 className="font-medium text-gray-900 dark:text-white">
+            <h5 className="font-medium text-primary">
               Recursos Incluídos:
             </h5>
             <ul className="mt-2 space-y-2">
@@ -209,7 +206,7 @@ function PlanAndPaymentsTab({ user }: { user: typeof mockUser }) {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <span className="text-secondary">
                     {feature}
                   </span>
                 </li>
@@ -220,17 +217,17 @@ function PlanAndPaymentsTab({ user }: { user: typeof mockUser }) {
       </div>
 
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <h3 className="text-lg font-medium text-primary">
           Métodos de Pagamento
         </h3>
         <div className="mt-4 space-y-4">
           {user.paymentMethods.map((method) => (
             <div
               key={method.id}
-              className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 dark:border-gray-700 dark:bg-gray-800/50"
+              className="container-base flex items-center justify-between p-4"
             >
               <div className="flex items-center">
-                <div className="mr-4 rounded-lg bg-white p-2 shadow-sm ring-1 ring-gray-200 dark:bg-gray-700 dark:ring-gray-600">
+                <div className="mr-4 container-gray p-2">
                   {method.brand === 'visa' ? (
                     <Image
                       src="https://raw.githubusercontent.com/gilbarbara/logos/main/logos/visa.svg"
@@ -248,11 +245,11 @@ function PlanAndPaymentsTab({ user }: { user: typeof mockUser }) {
                   )}
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-white">
+                  <p className="font-medium text-primary">
                     {method.brand.charAt(0).toUpperCase() + method.brand.slice(1)}{' '}
                     terminado em {method.last4}
                   </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-secondary">
                     Expira em {method.expiryMonth}/{method.expiryYear}
                   </p>
                 </div>
@@ -290,7 +287,7 @@ function PlanAndPaymentsTab({ user }: { user: typeof mockUser }) {
       </div>
 
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <h3 className="text-lg font-medium text-primary">
           Histórico de Pagamentos
         </h3>
         <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
@@ -356,136 +353,127 @@ function NotificationsTab({ user }: { user: typeof mockUser }) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <h3 className="text-lg font-medium text-primary">
           Central de Notificações
         </h3>
         <div className="mt-4 space-y-4">
           {user.notifications.map((notification) => (
             <div
               key={notification.id}
-              className={classNames(
-                'rounded-lg border p-4 shadow-sm transition-all duration-200',
-                notification.isRead
-                  ? 'border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800/50'
-                  : 'border-blue-200 bg-blue-50 dark:border-blue-800/50 dark:bg-blue-900/20'
-              )}
+              className="container-base flex items-center justify-between p-4"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div
-                    className={classNames(
-                      'mr-3 flex h-8 w-8 items-center justify-center rounded-full',
-                      notification.type === 'success'
-                        ? 'bg-green-100 text-green-500 dark:bg-green-900/30 dark:text-green-300'
-                        : notification.type === 'warning'
-                        ? 'bg-yellow-100 text-yellow-500 dark:bg-yellow-900/30 dark:text-yellow-300'
-                        : 'bg-blue-100 text-blue-500 dark:bg-blue-900/30 dark:text-blue-300'
-                    )}
-                  >
-                    {notification.type === 'success' ? (
-                      <svg
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    ) : notification.type === 'warning' ? (
-                      <svg
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    )}
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-gray-900 dark:text-white">
-                      {notification.title}
-                    </h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {notification.message}
-                    </p>
-                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                      {format(
-                        new Date(notification.date),
-                        "d 'de' MMMM 'às' HH:mm",
-                        {
-                          locale: ptBR
-                        }
-                      )}
-                    </p>
-                  </div>
+              <div className="flex items-center">
+                <div className="mr-4 container-gray p-2">
+                  {notification.type === 'success' ? (
+                    <svg
+                      className="h-5 w-5 text-green-500 dark:text-green-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  ) : notification.type === 'warning' ? (
+                    <svg
+                      className="h-5 w-5 text-yellow-500 dark:text-yellow-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="h-5 w-5 text-blue-500 dark:text-blue-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  )}
                 </div>
-                {!notification.isRead && (
-                  <button className="ml-4 text-sm font-medium text-blue-600 transition-colors duration-200 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                    Marcar como lida
-                  </button>
-                )}
+                <div>
+                  <h4 className="font-medium text-primary">
+                    {notification.title}
+                  </h4>
+                  <p className="text-sm text-secondary">
+                    {notification.message}
+                  </p>
+                  <p className="mt-1 text-xs text-secondary">
+                    {format(new Date(notification.date), "d 'de' MMMM 'às' HH:mm", {
+                      locale: ptBR,
+                    })}
+                  </p>
+                </div>
               </div>
+              <button className="text-secondary hover:text-primary">
+                <span className="sr-only">Fechar</span>
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
             </div>
           ))}
         </div>
       </div>
+
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <h3 className="text-lg font-medium text-primary">
           Preferências de Notificação
         </h3>
         <div className="mt-4 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">
+              <h4 className="font-medium text-primary">
                 Notificações por Email
               </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-secondary">
                 Receba atualizações importantes por email
               </p>
             </div>
-            <label className="relative inline-flex cursor-pointer items-center">
-              <input type="checkbox" className="peer sr-only" defaultChecked />
-              <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:bg-gray-700 dark:after:border-gray-600 dark:peer-checked:bg-blue-500 dark:peer-focus:ring-blue-800"></div>
-            </label>
+            <button className="container-base px-4 py-2 text-primary container-hover">
+              Configurar
+            </button>
           </div>
+
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="font-medium text-gray-900 dark:text-white">
+              <h4 className="font-medium text-primary">
                 Notificações Push
               </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-secondary">
                 Receba notificações em tempo real no navegador
               </p>
             </div>
-            <label className="relative inline-flex cursor-pointer items-center">
-              <input type="checkbox" className="peer sr-only" defaultChecked />
-              <div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:bg-gray-700 dark:after:border-gray-600 dark:peer-checked:bg-blue-500 dark:peer-focus:ring-blue-800"></div>
-            </label>
+            <button className="container-base px-4 py-2 text-primary container-hover">
+              Configurar
+            </button>
           </div>
         </div>
       </div>
@@ -497,60 +485,55 @@ function SecurityTab() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <h3 className="text-lg font-medium text-primary">
           Alterar Senha
         </h3>
         <div className="mt-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block text-sm font-medium text-secondary">
               Senha Atual
             </label>
             <input
               type="password"
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+              className="input-base mt-1 block w-full"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block text-sm font-medium text-secondary">
               Nova Senha
             </label>
             <input
               type="password"
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+              className="input-base mt-1 block w-full"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block text-sm font-medium text-secondary">
               Confirmar Nova Senha
             </label>
             <input
               type="password"
-              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+              className="input-base mt-1 block w-full"
             />
-          </div>
-          <div className="flex justify-end">
-            <button className="rounded-md bg-blue-600 px-4 py-2 text-white shadow-sm transition-all duration-200 hover:bg-blue-700 hover:shadow dark:bg-blue-500 dark:hover:bg-blue-600">
-              Alterar Senha
-            </button>
           </div>
         </div>
       </div>
 
       <div>
-        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+        <h3 className="text-lg font-medium text-primary">
           Autenticação em Duas Etapas
         </h3>
         <div className="mt-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-gray-900 dark:text-white">
+              <p className="font-medium text-primary">
                 Status: Desativado
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-secondary">
                 Adicione uma camada extra de segurança à sua conta
               </p>
             </div>
-            <button className="rounded-md bg-blue-600 px-4 py-2 text-white shadow-sm transition-all duration-200 hover:bg-blue-700 hover:shadow dark:bg-blue-500 dark:hover:bg-blue-600">
+            <button className="container-base px-4 py-2 text-primary container-hover">
               Ativar
             </button>
           </div>

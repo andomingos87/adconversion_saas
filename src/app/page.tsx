@@ -32,9 +32,9 @@ export default function Home() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold text-[#1E2329]">Dashboard</h1>
-        <p className="mt-1 text-[#1E2329]/70">
-          Manage your videos and monitor your statistics
+        <h1 className="text-2xl font-semibold text-[#1E2329] dark:text-white">Dashboard</h1>
+        <p className="mt-1 text-[#1E2329]/70 dark:text-gray-400">
+          Gerencie seus vídeos e monitore suas estatísticas
         </p>
       </div>
 
@@ -42,9 +42,9 @@ export default function Home() {
 
       <div>
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-[#1E2329]">Trending Videos</h2>
-          <p className="mt-1 text-[#1E2329]/70">
-            Most popular videos on the platform
+          <h2 className="text-xl font-semibold text-[#1E2329] dark:text-white">Vídeos em Alta</h2>
+          <p className="mt-1 text-[#1E2329]/70 dark:text-gray-400">
+            Vídeos mais populares na plataforma
           </p>
         </div>
 
@@ -62,17 +62,17 @@ export default function Home() {
 
       <div>
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-[#1E2329]">Recent Creations</h2>
-          <p className="mt-1 text-[#1E2329]/70">
-            Your recent videos will appear here
+          <h2 className="text-xl font-semibold text-[#1E2329] dark:text-white">Criações Recentes</h2>
+          <p className="mt-1 text-[#1E2329]/70 dark:text-gray-400">
+            Seus vídeos recentes aparecerão aqui
           </p>
         </div>
 
-        <div className="rounded-lg border border-dashed border-[#E6E8EA] p-8">
+        <div className="rounded-lg border border-dashed border-[#E6E8EA] p-8 dark:border-gray-700">
           <div className="text-center">
-            <p className="text-[#1E2329]">No videos created yet</p>
-            <p className="mt-1 text-sm text-[#1E2329]/70">
-              Click "Generate New Ad" to create your first video
+            <p className="text-[#1E2329] dark:text-white">Nenhum vídeo criado ainda</p>
+            <p className="mt-1 text-sm text-[#1E2329]/70 dark:text-gray-400">
+              Clique em "Gerar Novo Anúncio" para criar seu primeiro vídeo
             </p>
           </div>
         </div>

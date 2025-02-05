@@ -51,7 +51,9 @@ export function Header() {
               Gerar Novo Anúncio
             </button>
 
-            <UserMenu />
+            <div className="relative z-50">
+              <UserMenu />
+            </div>
           </div>
         </div>
       </header>

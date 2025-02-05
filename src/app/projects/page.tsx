@@ -49,11 +49,11 @@ export default function ProjectsPage() {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-[#1E2329]">Meus Projetos</h1>
-        <Button onClick={() => setShowProjectSelection(true)}>
+        <h1 className="text-2xl font-semibold text-[#1E2329] dark:text-white">Meus Projetos</h1>
+        {/* <Button onClick={() => setShowProjectSelection(true)}>
           <Plus className="mr-2 h-4 w-4" />
           Gerar Novo Anúncio
-        </Button>
+        </Button> */}
       </div>
 
       <div className="flex flex-col gap-8">

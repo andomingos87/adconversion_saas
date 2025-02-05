@@ -19,11 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className="light">
-      <body className={`${inter.className} min-h-screen bg-white dark:bg-gray-900`}>
+      <body className={`${inter.className} min-h-screen bg-white transition-colors duration-300 dark:bg-gray-900`}>
         <ThemeProvider>
           <Sidebar />
           <Header />
-          <main className="min-h-screen pl-60 pt-[60px] dark:bg-gray-900">
+          <main className="min-h-screen pl-60 pt-[60px] bg-gray-50 transition-colors duration-300 dark:bg-gray-900">
             <div className="mx-auto max-w-[1440px] p-6">
               {children}
             </div>

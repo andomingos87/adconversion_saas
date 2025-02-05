@@ -31,15 +31,15 @@ export function StatsGrid() {
         return (
           <div
             key={stat.name}
-            className="rounded-lg bg-[#F7F8FA] p-6"
+            className="rounded-lg bg-[#F7F8FA] p-6 transition-colors duration-300 dark:bg-gray-800/90"
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-sm font-medium text-[#1E2329]/70">{stat.name}</p>
-                <p className="mt-2 text-3xl font-semibold text-[#1E2329]">{stat.value}</p>
-                <p className="mt-1 text-sm text-[#1E2329]/70">{stat.description}</p>
+                <p className="text-sm font-medium text-[#1E2329]/70 dark:text-gray-300">{stat.name}</p>
+                <p className="mt-2 text-3xl font-semibold text-[#1E2329] dark:text-gray-50">{stat.value}</p>
+                <p className="mt-1 text-sm text-[#1E2329]/70 dark:text-gray-300">{stat.description}</p>
               </div>
-              <Icon className="h-5 w-5 text-[#1652F0]" />
+              <Icon className="h-5 w-5 text-[#1652F0] dark:text-blue-300" />
             </div>
           </div>
         )

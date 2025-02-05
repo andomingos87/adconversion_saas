@@ -16,8 +16,8 @@ export function ProjectCard({ project, isSelected, onSelect }: ProjectCardProps)
 
   return (
     <div
-      className={`group relative flex w-[260px] shrink-0 cursor-pointer flex-col rounded-lg border border-[#E6E8EA] bg-white p-3 transition-colors hover:border-[#125CC6] ${
-        isSelected ? 'border-[#125CC6]' : ''
+      className={`container-interactive shadow-hover w-[260px] shrink-0 p-3 ${
+        isSelected ? 'border-[#125CC6] dark:border-blue-500' : ''
       }`}
       onClick={onSelect}
     >
@@ -32,8 +32,10 @@ export function ProjectCard({ project, isSelected, onSelect }: ProjectCardProps)
 
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="mb-1 font-medium text-[#1E2329]">{project.name}</h3>
-          <p className="flex items-center gap-1 text-sm text-[#1E2329]/70">
+          <h3 className="mb-1 font-medium text-primary">
+            {project.name}
+          </h3>
+          <p className="flex items-center gap-1 text-sm text-secondary">
             <span>{project.videoCount}</span>
             <span>vídeos</span>
           </p>
@@ -45,21 +47,21 @@ export function ProjectCard({ project, isSelected, onSelect }: ProjectCardProps)
               e.stopPropagation()
               setShowMenu(!showMenu)
             }}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-[#1E2329]/70 hover:bg-[#E6E8EA] hover:text-[#1E2329]"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-secondary container-hover"
           >
             <MoreVertical className="h-4 w-4" />
           </button>
 
           {showMenu && (
             <div
-              className="fixed right-0 top-full z-50 mt-1 w-36 overflow-hidden rounded-lg border border-[#E6E8EA] bg-white py-1 shadow-lg"
+              className="container-base fixed right-0 top-full z-50 mt-1 w-36 overflow-hidden py-1 shadow-lg"
               onClick={(e) => e.stopPropagation()}
             >
-              <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-[#1E2329] hover:bg-[#E6E8EA]">
+              <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-primary container-hover">
                 <Pencil className="h-3.5 w-3.5" />
                 Renomear
               </button>
-              <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-500 hover:bg-[#E6E8EA]">
+              <button className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-500 container-hover dark:text-red-400">
                 <Trash className="h-3.5 w-3.5" />
                 Excluir
               </button>
