@@ -85,6 +85,25 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
   const [showDeleteScriptConfirm, setShowDeleteScriptConfirm] = useState<number | null>(null)
   const [editingScriptId, setEditingScriptId] = useState<number | null>(null)
   const [editingScriptContent, setEditingScriptContent] = useState('')
+  const [activeTab, setActiveTab] = useState<'format' | 'captions' | 'avatar'>('format')
+  const [selectedCaptionTemplate, setSelectedCaptionTemplate] = useState<number | null>(null)
+
+  const mockCaptionTemplates = Array.from({ length: 20 }, (_, i) => ({
+    id: i + 1,
+    name: `Template ${i + 1}`,
+    preview: `/templates/${i + 1}.png`
+  }))
+
+  const mockAvatars = {
+    landscape: [
+      { id: 1, name: 'Avatar 1', preview: '/avatars/landscape/1.mp4' },
+      { id: 2, name: 'Avatar 2', preview: '/avatars/landscape/2.mp4' },
+    ],
+    portrait: [
+      { id: 1, name: 'Avatar 1', preview: '/avatars/portrait/1.mp4' },
+      { id: 2, name: 'Avatar 2', preview: '/avatars/portrait/2.mp4' },
+    ]
+  }
 
   useEffect(() => {
     // Simula a chamada da API que retorna 6 scripts
@@ -511,56 +530,158 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Configurações Finais',
       subtitle: 'Configure os detalhes finais do seu vídeo.',
       content: (
-        <div className="space-y-6">
-          <div className="mt-8 space-y-4">
-            <h3 className="font-medium text-[#1E2329] dark:text-white">Formato do Vídeo</h3>
-            <div className="flex gap-4">
+        <div className="space-y-8">
+          {/* Tabs */}
+          <nav className="flex justify-center gap-8">
+            {[
+              { id: 'format', label: 'Formato' },
+              { id: 'captions', label: 'Legendas' },
+              { id: 'avatar', label: 'Avatar' }
+            ].map((tab) => (
               <button
-                onClick={() => setVideoFormat('landscape')}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-lg border p-3 text-sm transition-colors ${
-                  videoFormat === 'landscape'
-                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
-                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                  activeTab === tab.id
+                    ? 'text-[#125CC6] dark:text-blue-400'
+                    : 'text-[#1E2329]/70 hover:text-[#1E2329] dark:text-gray-400 dark:hover:text-gray-200'
                 }`}
               >
-                Paisagem (16:9)
+                {tab.label}
+                {activeTab === tab.id && (
+                  <div className="absolute -bottom-[2px] left-0 right-0 h-0.5 rounded-full bg-[#125CC6] dark:bg-blue-400" />
+                )}
               </button>
-              <button
-                onClick={() => setVideoFormat('portrait')}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-lg border p-3 text-sm transition-colors ${
-                  videoFormat === 'portrait'
-                    ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
-                    : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
-                }`}
-              >
-                Retrato (9:16)
-              </button>
-            </div>
-          </div>
+            ))}
+          </nav>
 
-          <div className="mt-8 space-y-4">
-            <h3 className="font-medium text-[#1E2329] dark:text-white">Opções Adicionais</h3>
-            <div className="space-y-3">
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={showCaptions}
-                  onChange={(e) => setShowCaptions(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#125CC6] focus:ring-[#125CC6] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-500"
-                />
-                <span className="text-sm text-[#1E2329] dark:text-gray-200">Adicionar Legendas</span>
-              </label>
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={showAvatar}
-                  onChange={(e) => setShowAvatar(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#125CC6] focus:ring-[#125CC6] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-500"
-                />
-                <span className="text-sm text-[#1E2329] dark:text-gray-200">Mostrar Avatar</span>
-              </label>
+          {/* Format Tab Content */}
+          {activeTab === 'format' && (
+            <div className="flex justify-center gap-8">
+              {[
+                { id: 'landscape', label: 'Paisagem', ratio: '16:9' },
+                { id: 'portrait', label: 'Retrato', ratio: '9:16' }
+              ].map((format) => (
+                <button
+                  key={format.id}
+                  onClick={() => setVideoFormat(format.id as VideoFormat)}
+                  className={`group flex flex-col items-center gap-4 rounded-xl p-4 transition-all hover:bg-[#125CC6]/5 dark:hover:bg-blue-500/10 ${
+                    videoFormat === format.id ? 'text-[#125CC6] dark:text-blue-400' : 'text-[#1E2329] dark:text-gray-200'
+                  }`}
+                >
+                  <div className={`relative flex items-center justify-center rounded-lg border-2 transition-colors ${
+                    videoFormat === format.id 
+                      ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20' 
+                      : 'border-[#E6E8EA] dark:border-gray-700'
+                  }`}>
+                    {format.id === 'landscape' ? (
+                      <div className="h-32 w-56 p-2">
+                        <div className="h-full w-full rounded bg-current/10" />
+                      </div>
+                    ) : (
+                      <div className="h-56 w-32 p-2">
+                        <div className="h-full w-full rounded bg-current/10" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-center">
+                    <p className="font-medium">{format.label}</p>
+                    <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">{format.ratio}</p>
+                  </div>
+                </button>
+              ))}
             </div>
-          </div>
+          )}
+
+          {/* Captions Tab Content */}
+          {activeTab === 'captions' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-center gap-2">
+                <label className="flex items-center gap-3 rounded-lg border border-[#E6E8EA] px-4 py-2 dark:border-gray-700">
+                  <input
+                    type="checkbox"
+                    checked={showCaptions}
+                    onChange={(e) => setShowCaptions(e.target.checked)}
+                    className="h-4 w-4 rounded border-gray-300 text-[#125CC6] focus:ring-[#125CC6] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-500"
+                  />
+                  <span className="text-sm font-medium text-[#1E2329] dark:text-gray-200">Adicionar Legendas</span>
+                </label>
+              </div>
+
+              {showCaptions && (
+                <div className="relative mx-auto max-w-3xl overflow-hidden rounded-xl border border-[#E6E8EA] bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+                  <div className="grid grid-cols-3 gap-4">
+                    {mockCaptionTemplates.map((template) => (
+                      <button
+                        key={template.id}
+                        onClick={() => setSelectedCaptionTemplate(template.id)}
+                        className={`group relative aspect-[2.42/1] w-full overflow-hidden rounded-lg transition-transform hover:scale-[1.02] ${
+                          selectedCaptionTemplate === template.id
+                            ? 'ring-2 ring-[#125CC6] ring-offset-2 dark:ring-blue-500 dark:ring-offset-gray-800'
+                            : ''
+                        }`}
+                      >
+                        <img
+                          src={template.preview}
+                          alt={template.name}
+                          className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+                          <span className="text-sm font-medium text-white">Selecionar</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {!showCaptions && (
+                <div className="flex flex-col items-center justify-center space-y-2 py-12 text-center">
+                  <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+                    Ative as legendas para visualizar os templates disponíveis
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Avatar Tab Content */}
+          {activeTab === 'avatar' && (
+            <div className="mx-auto max-w-3xl space-y-6">
+              <div className="grid grid-cols-2 gap-6">
+                {mockAvatars[videoFormat || 'landscape'].map((avatar) => (
+                  <button
+                    key={avatar.id}
+                    onClick={() => setShowAvatar(true)}
+                    className={`group relative aspect-video overflow-hidden rounded-xl transition-transform hover:scale-[1.02] ${
+                      showAvatar
+                        ? 'ring-2 ring-[#125CC6] ring-offset-2 dark:ring-blue-500 dark:ring-offset-gray-800'
+                        : 'ring-1 ring-[#E6E8EA] dark:ring-gray-700'
+                    }`}
+                  >
+                    <video 
+                      src={avatar.preview}
+                      className="h-full w-full object-cover"
+                      loop 
+                      muted 
+                      playsInline
+                      controls={false}
+                      onMouseEnter={(e) => e.currentTarget.play()}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.pause()
+                        e.currentTarget.currentTime = 0
+                      }}
+                      onClick={(e) => e.preventDefault()}
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+                      <span className="text-sm font-medium text-white">Selecionar Avatar</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       ),
       isValid: () => videoFormat !== null
