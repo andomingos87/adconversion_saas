@@ -30,8 +30,8 @@ export function StepHeader({
         </div>
       </div>
 
-      <div>
-        <h2 className="mb-1 text-lg font-medium text-[#1E2329] dark:text-white">{title}</h2>
+      <div className="text-center">
+        <h2 className="mb-1 text-xl font-medium text-[#1E2329] dark:text-white">{title}</h2>
         <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">{subtitle}</p>
       </div>
     </div>

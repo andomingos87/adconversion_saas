@@ -84,6 +84,13 @@ export function ProjectSelectionModal({
       <div className="flex flex-col space-y-6">
         {step === 'select' && (
           <>
+            <div className="text-center">
+              <h3 className="text-lg font-medium text-[#1E2329] dark:text-gray-200">Seus Projetos</h3>
+              <p className="mt-1 text-sm text-[#1E2329]/70 dark:text-gray-400">
+                Selecione um projeto existente ou crie um novo
+              </p>
+            </div>
+
             <div className="grid max-h-[60vh] gap-4 overflow-y-auto pr-2">
               {projects.map((project) => (
                 <div
@@ -112,66 +119,41 @@ export function ProjectSelectionModal({
                 </div>
               ))}
             </div>
-
-            <div className="flex items-center justify-between pt-2">
-              <Button
-                variant="secondary"
-                className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
-                onClick={() => setStep('create')}
-              >
-               +  Criar Novo Projeto
-              </Button>
-
-              <Button
-                onClick={handleNext}
-                disabled={!selectedProject}
-                className="bg-[#125CC6] text-white hover:bg-[#125CC6]/90 dark:bg-[#125CC6] dark:hover:bg-[#125CC6]/80 disabled:bg-gray-300 dark:disabled:bg-gray-700"
-              >
-                Continuar
-              </Button>
-            </div>
           </>
         )}
 
         {step === 'create' && (
           <>
+            <div className="text-center">
+              <h3 className="text-lg font-medium text-[#1E2329] dark:text-gray-200">Novo Projeto</h3>
+              <p className="mt-1 text-sm text-[#1E2329]/70 dark:text-gray-400">
+                Digite um nome para identificar seu projeto
+              </p>
+            </div>
+
             <div className="space-y-4">
               <div>
-                <label className="mb-2 block text-sm font-medium text-[#1E2329] dark:text-gray-200">
-                  Nome do Projeto
-                </label>
                 <input
                   type="text"
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   placeholder="Digite o nome do projeto..."
-                  className="w-full rounded-lg border border-[#E6E8EA] dark:border-gray-700 bg-white dark:bg-gray-800 p-3 text-sm text-[#1E2329] dark:text-gray-200 placeholder-[#1E2329]/50 dark:placeholder-gray-400 outline-none focus:border-[#125CC6]"
+                  className="w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400"
                 />
               </div>
-            </div>
-
-            <div className="flex items-center justify-between pt-2">
-              <Button
-                variant="secondary" 
-                className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
-                onClick={() => setStep('select')}
-              >
-                Voltar
-              </Button>
-
-              <Button
-                onClick={handleNext}
-                disabled={!projectName.trim()}
-                className="bg-[#125CC6] text-white hover:bg-[#125CC6]/90 dark:bg-[#125CC6] dark:hover:bg-[#125CC6]/80 disabled:bg-gray-300 dark:disabled:bg-gray-700"
-              >
-                Continuar
-              </Button>
             </div>
           </>
         )}
 
         {step === 'platform' && (
           <>
+            <div className="text-center">
+              <h3 className="text-lg font-medium text-[#1E2329] dark:text-gray-200">Plataforma</h3>
+              <p className="mt-1 text-sm text-[#1E2329]/70 dark:text-gray-400">
+                Escolha onde você deseja publicar seus vídeos
+              </p>
+            </div>
+
             <div className="grid gap-4 md:grid-cols-2">
               <button
                 onClick={() => setPlatform('meta')}
@@ -221,29 +203,18 @@ export function ProjectSelectionModal({
                 </div>
               </button>
             </div>
-
-            <div className="flex items-center justify-between pt-2">
-              <Button
-                variant="secondary"
-                className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
-                onClick={() => setStep('select')}
-              >
-                Voltar
-
-              </Button>
-
-              <Button
-                onClick={handleNext}
-                disabled={!platform}
-              >
-                Continuar
-              </Button>
-            </div>
           </>
         )}
 
         {step === 'language' && (
           <>
+            <div className="text-center">
+              <h3 className="text-lg font-medium text-[#1E2329] dark:text-gray-200">Idioma</h3>
+              <p className="mt-1 text-sm text-[#1E2329]/70 dark:text-gray-400">
+                Selecione o idioma principal do seu projeto
+              </p>
+            </div>
+
             <div className="grid gap-4 md:grid-cols-2">
               <button
                 onClick={() => setLanguage('pt-BR')}
@@ -293,24 +264,56 @@ export function ProjectSelectionModal({
                 </div>
               </button>
             </div>
+          </>
+        )}
 
-            <div className="flex items-center justify-between pt-2">
+        <div className="flex items-center justify-between pt-2">
+          {step === 'select' ? (
+            <>
               <Button
                 variant="secondary"
+                className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
                 onClick={() => setStep('create')}
+              >
+                + Criar Novo Projeto
+              </Button>
+
+              <Button
+                onClick={handleNext}
+                disabled={!selectedProject}
+                className="bg-[#125CC6] text-white hover:bg-[#125CC6]/90 dark:bg-[#125CC6] dark:hover:bg-[#125CC6]/80 disabled:bg-gray-300 dark:disabled:bg-gray-700"
+              >
+                Continuar
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="secondary"
+                className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
+                onClick={() => {
+                  if (step === 'create') setStep('select')
+                  if (step === 'platform') setStep('select')
+                  if (step === 'language') setStep('create')
+                }}
               >
                 Voltar
               </Button>
 
               <Button
                 onClick={handleNext}
-                disabled={!language}
+                disabled={
+                  (step === 'create' && !projectName.trim()) ||
+                  (step === 'platform' && !platform) ||
+                  (step === 'language' && !language)
+                }
+                className="bg-[#125CC6] text-white hover:bg-[#125CC6]/90 dark:bg-[#125CC6] dark:hover:bg-[#125CC6]/80 disabled:bg-gray-300 dark:disabled:bg-gray-700"
               >
                 Continuar
               </Button>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
     </Modal>
   )
