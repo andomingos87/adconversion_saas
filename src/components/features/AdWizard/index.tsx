@@ -410,56 +410,98 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Selecione o Estilo',
       subtitle: 'Escolha o formato de vídeo que você prefere para seu anúncio.',
       content: (
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid h-[400px] gap-4 md:grid-cols-3">
           <button
             onClick={() => setVideoStyle('ugc')}
-            className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
+            className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
               videoStyle === 'ugc'
                 ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
                 : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
-              <Users className="h-6 w-6 text-[#125CC6] dark:text-blue-400" />
+            <h3 className="font-medium text-[#1E2329] dark:text-white">UGC</h3>
+            <div className="group relative flex-1 overflow-hidden rounded-lg">
+              <video 
+                src="/videos/ugc.mp4" 
+                className="h-full w-full object-cover"
+                loop 
+                muted 
+                playsInline
+                controls={false}
+                onMouseEnter={(e) => e.currentTarget.play()}
+                onMouseLeave={(e) => {
+                  e.currentTarget.pause()
+                  e.currentTarget.currentTime = 0
+                }}
+                onClick={(e) => e.preventDefault()}
+                onContextMenu={(e) => e.preventDefault()}
+              />
             </div>
-            <div>
-              <h3 className="mb-1 font-medium text-[#1E2329] dark:text-white">UGC</h3>
-              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">Apenas Avatar IA</p>
-            </div>
+            <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+              Apenas Avatar IA
+            </p>
           </button>
 
           <button
             onClick={() => setVideoStyle('broll')}
-            className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
+            className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
               videoStyle === 'broll'
                 ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
                 : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
-              <Video className="h-6 w-6 text-[#125CC6] dark:text-blue-400" />
+            <h3 className="font-medium text-[#1E2329] dark:text-white">B-ROLL</h3>
+            <div className="group relative flex-1 overflow-hidden rounded-lg">
+              <video 
+                src="/videos/broll.mp4" 
+                className="h-full w-full object-cover"
+                loop 
+                muted 
+                playsInline
+                controls={false}
+                onMouseEnter={(e) => e.currentTarget.play()}
+                onMouseLeave={(e) => {
+                  e.currentTarget.pause()
+                  e.currentTarget.currentTime = 0
+                }}
+                onClick={(e) => e.preventDefault()}
+                onContextMenu={(e) => e.preventDefault()}
+              />
             </div>
-            <div>
-              <h3 className="mb-1 font-medium text-[#1E2329] dark:text-white">B-ROLL</h3>
-              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">Avatar + Vídeo Stock</p>
-            </div>
+            <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+              Avatar + Vídeo Stock
+            </p>
           </button>
 
           <button
             onClick={() => setVideoStyle('cinematic')}
-            className={`flex flex-col items-center gap-4 rounded-lg border p-6 text-center transition-colors ${
+            className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
               videoStyle === 'cinematic'
                 ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
                 : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
             }`}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#125CC6]/10 dark:bg-blue-500/30">
-              <Film className="h-6 w-6 text-[#125CC6] dark:text-blue-400" />
+            <h3 className="font-medium text-[#1E2329] dark:text-white">CINEMATIC</h3>
+            <div className="group relative flex-1 overflow-hidden rounded-lg">
+              <video 
+                src="/videos/cinematic.mp4" 
+                className="h-full w-full object-cover"
+                loop 
+                muted 
+                playsInline
+                controls={false}
+                onMouseEnter={(e) => e.currentTarget.play()}
+                onMouseLeave={(e) => {
+                  e.currentTarget.pause()
+                  e.currentTarget.currentTime = 0
+                }}
+                onClick={(e) => e.preventDefault()}
+                onContextMenu={(e) => e.preventDefault()}
+              />
             </div>
-            <div>
-              <h3 className="mb-1 font-medium text-[#1E2329] dark:text-white">CINEMATIC</h3>
-              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">Vídeo Stock Premium</p>
-            </div>
+            <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+              Vídeo Stock Premium
+            </p>
           </button>
         </div>
       ),
