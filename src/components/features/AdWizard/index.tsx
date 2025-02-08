@@ -80,6 +80,16 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
   const [editingText, setEditingText] = useState('')
   
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<number | null>(null)
+  const [availableScripts, setAvailableScripts] = useState<typeof mockScripts>([])
+  const [currentScriptIndex, setCurrentScriptIndex] = useState(0)
+  const [showDeleteScriptConfirm, setShowDeleteScriptConfirm] = useState<number | null>(null)
+  const [editingScriptId, setEditingScriptId] = useState<number | null>(null)
+  const [editingScriptContent, setEditingScriptContent] = useState('')
+
+  useEffect(() => {
+    // Simula a chamada da API que retorna 6 scripts
+    setAvailableScripts(mockScripts)
+  }, [])
 
   const handleEditHook = (hook: typeof mockHooks[0]) => {
     setEditingHookId(hook.id)
@@ -108,6 +118,33 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
     if (selectedHooks.includes(mockHooks.find(h => h.id === id)?.text || '')) {
       setSelectedHooks([])
     }
+  }
+
+  const handleDeleteScript = (scriptId: number) => {
+    setAvailableScripts(prev => prev.filter(script => script.id !== scriptId))
+    setShowDeleteScriptConfirm(null)
+  }
+
+  const handleEditScript = (script: typeof mockScripts[0]) => {
+    setEditingScriptId(script.id)
+    setEditingScriptContent(script.content)
+  }
+
+  const handleSaveScript = (id: number) => {
+    setAvailableScripts(prev => 
+      prev.map(script => 
+        script.id === id ? { ...script, content: editingScriptContent } : script
+      )
+    )
+    setEditingScriptId(null)
+    setEditingScriptContent('')
+  }
+
+  const handleGenerateNewScripts = () => {
+    // Aqui você chamaria a API para gerar novos scripts
+    // Por enquanto vamos apenas resetar com os scripts mock
+    setAvailableScripts(mockScripts)
+    setCurrentScriptIndex(0)
   }
 
   const steps = [
@@ -249,42 +286,122 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Selecione o Script',
       subtitle: 'Escolha o script que melhor se encaixa no seu anúncio.',
       content: (
-        <div className="space-y-4">
-          <div className="grid gap-4">
-            {mockScripts.map((script) => (
+        <div className="space-y-6">
+          <div className="grid grid-cols-2 gap-4">
+            {availableScripts.slice(currentScriptIndex, currentScriptIndex + 2).map((script) => (
               <div
                 key={script.id}
-                className={`rounded-lg border p-4 transition-colors ${
+                className={`group relative rounded-lg border p-4 transition-all hover:border-[#125CC6] hover:shadow-sm dark:hover:border-blue-500 ${
                   selectedScript === script.id
                     ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
                     : 'border-[#E6E8EA] dark:border-gray-700'
                 }`}
               >
-                <div className="mb-3 flex items-center justify-between">
-                  <h3 className="font-medium text-[#1E2329] dark:text-white">{script.title}</h3>
-                  <div className="flex gap-2">
-                    <button className="text-[#1E2329]/70 hover:text-[#125CC6] dark:text-gray-400 dark:hover:text-blue-400">
-                      <Edit className="h-4 w-4" />
-                    </button>
-                    <button className="text-[#1E2329]/70 hover:text-[#125CC6] dark:text-gray-400 dark:hover:text-blue-400">
-                      <RefreshCw className="h-4 w-4" />
-                    </button>
+                {editingScriptId === script.id ? (
+                  <div className="flex flex-col gap-4">
+                    <textarea
+                      value={editingScriptContent}
+                      onChange={(e) => setEditingScriptContent(e.target.value)}
+                      className="h-32 w-full resize-none rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                      autoFocus
+                    />
+                    <div className="flex justify-end gap-2">
+                      <button
+                        onClick={() => handleSaveScript(script.id)}
+                        className="rounded-full p-2 text-[#125CC6] hover:bg-[#125CC6]/10 dark:text-blue-400 dark:hover:bg-blue-500/20"
+                      >
+                        <Check className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          setEditingScriptId(null)
+                          setEditingScriptContent('')
+                        }}
+                        className="rounded-full p-2 text-red-500 hover:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <p className="mb-4 text-sm text-[#1E2329]/70 dark:text-gray-400">{script.content}</p>
-                <button
-                  onClick={() => setSelectedScript(script.id)}
-                  className={`w-full rounded-lg border p-2 text-sm transition-colors ${
-                    selectedScript === script.id
-                      ? 'border-[#125CC6] bg-white text-[#125CC6] dark:border-blue-500 dark:bg-gray-800 dark:text-blue-400'
-                      : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500'
-                  }`}
-                >
-                  {selectedScript === script.id ? 'Selecionado' : 'Selecionar'}
-                </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setSelectedScript(script.id)}
+                      className="mb-4 w-full text-left"
+                    >
+                      <h3 className="mb-2 font-medium text-[#1E2329] dark:text-gray-200">
+                        {script.title}
+                      </h3>
+                      <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+                        {script.content}
+                      </p>
+                    </button>
+                    <div className="flex justify-end gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleEditScript(script)
+                        }}
+                        className="rounded-full p-2 text-[#1E2329]/50 hover:bg-[#125CC6]/10 hover:text-[#125CC6] dark:text-gray-400 dark:hover:bg-blue-500/20 dark:hover:text-blue-400"
+                      >
+                        <Edit className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setShowDeleteScriptConfirm(script.id)
+                        }}
+                        className="rounded-full p-2 text-[#1E2329]/50 hover:bg-[#125CC6]/10 hover:text-[#125CC6] dark:text-gray-400 dark:hover:bg-blue-500/20 dark:hover:text-blue-400"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                {showDeleteScriptConfirm === script.id && (
+                  <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-white/95 dark:bg-gray-800/95">
+                    <div className="text-center">
+                      <p className="mb-4 text-sm text-[#1E2329] dark:text-gray-200">
+                        Tem certeza que deseja excluir este script?
+                      </p>
+                      <div className="flex justify-center gap-2">
+                        <button
+                          onClick={() => handleDeleteScript(script.id)}
+                          className="rounded-lg bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-600"
+                        >
+                          Excluir
+                        </button>
+                        <button
+                          onClick={() => setShowDeleteScriptConfirm(null)}
+                          className="rounded-lg bg-[#E6E8EA] px-4 py-2 text-sm text-[#1E2329] hover:bg-[#E6E8EA]/80 dark:bg-gray-700 dark:text-gray-200"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
+
+          {availableScripts.length === 0 && (
+            <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border border-dashed border-[#E6E8EA] p-8 dark:border-gray-700">
+              <RefreshCw className="h-8 w-8 text-[#1E2329]/50 dark:text-gray-400" />
+              <div className="text-center">
+                <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+                  Nenhum script disponível
+                </p>
+                <button
+                  onClick={handleGenerateNewScripts}
+                  className="mt-2 text-sm font-medium text-[#125CC6] hover:underline dark:text-blue-400"
+                >
+                  Gerar novos scripts
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       ),
       isValid: () => selectedScript !== null
