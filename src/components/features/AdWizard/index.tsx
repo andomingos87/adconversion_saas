@@ -171,12 +171,12 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Fale sobre seu Produto',
       subtitle: 'Comece compartilhando o essencial sobre seu produto.',
       content: (
-        <div className="space-y-4">
+        <div className="mx-auto max-w-2xl space-y-4">
           <textarea
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
             placeholder="Descreva seu produto..."
-            className="h-32 w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
+            className="h-40 w-full rounded-lg border border-[#E6E8EA] bg-white p-4 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
           />
         </div>
       ),
@@ -186,13 +186,13 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Landing Page',
       subtitle: 'Informe a URL da sua landing page.',
       content: (
-        <div className="space-y-4">
+        <div className="mx-auto max-w-2xl space-y-4">
           <input
             type="url"
             value={landingPage}
             onChange={(e) => setLandingPage(e.target.value)}
             placeholder="Digite a URL da landing page..."
-            className="w-full rounded-lg border border-[#E6E8EA] bg-white p-3 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
+            className="w-full rounded-lg border border-[#E6E8EA] bg-white p-4 text-sm text-[#1E2329] placeholder:text-[#1E2329]/50 outline-none focus:border-[#125CC6] dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:border-blue-500"
           />
         </div>
       ),
@@ -209,7 +209,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Escolha o Gancho',
       subtitle: 'Selecione a frase que melhor se conecta com seu público.',
       content: (
-        <div className="space-y-6">
+        <div className="mx-auto max-w-3xl space-y-6">
           <div className="grid gap-4">
             {mockHooks.map((hook) => (
               <div
@@ -305,12 +305,12 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Selecione o Script',
       subtitle: 'Escolha o script que melhor se encaixa no seu anúncio.',
       content: (
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="mx-auto max-w-5xl space-y-6">
+          <div className="grid grid-cols-2 gap-6">
             {availableScripts.slice(currentScriptIndex, currentScriptIndex + 2).map((script) => (
               <div
                 key={script.id}
-                className={`group relative rounded-lg border p-4 transition-all hover:border-[#125CC6] hover:shadow-sm dark:hover:border-blue-500 ${
+                className={`group relative rounded-lg border p-6 transition-all hover:border-[#125CC6] hover:shadow-sm dark:hover:border-blue-500 ${
                   selectedScript === script.id
                     ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20'
                     : 'border-[#E6E8EA] dark:border-gray-700'
@@ -429,99 +429,101 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Selecione o Estilo',
       subtitle: 'Escolha o formato de vídeo que você prefere para seu anúncio.',
       content: (
-        <div className="grid h-[400px] gap-4 md:grid-cols-3">
-          <button
-            onClick={() => setVideoStyle('ugc')}
-            className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
-              videoStyle === 'ugc'
-                ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
-                : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
-            }`}
-          >
-            <h3 className="font-medium text-[#1E2329] dark:text-white">UGC</h3>
-            <div className="group relative flex-1 overflow-hidden rounded-lg">
-              <video 
-                src="/videos/ugc.mp4" 
-                className="h-full w-full object-cover"
-                loop 
-                muted 
-                playsInline
-                controls={false}
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => {
-                  e.currentTarget.pause()
-                  e.currentTarget.currentTime = 0
-                }}
-                onClick={(e) => e.preventDefault()}
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            </div>
-            <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
-              Apenas Avatar IA
-            </p>
-          </button>
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-6 md:grid-cols-3">
+            <button
+              onClick={() => setVideoStyle('ugc')}
+              className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
+                videoStyle === 'ugc'
+                  ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                  : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
+              }`}
+            >
+              <h3 className="font-medium text-[#1E2329] dark:text-white">UGC</h3>
+              <div className="group relative flex-1 overflow-hidden rounded-lg">
+                <video 
+                  src="/videos/ugc.mp4" 
+                  className="h-full w-full object-cover"
+                  loop 
+                  muted 
+                  playsInline
+                  controls={false}
+                  onMouseEnter={(e) => e.currentTarget.play()}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.pause()
+                    e.currentTarget.currentTime = 0
+                  }}
+                  onClick={(e) => e.preventDefault()}
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              </div>
+              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+                Apenas Avatar IA
+              </p>
+            </button>
 
-          <button
-            onClick={() => setVideoStyle('broll')}
-            className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
-              videoStyle === 'broll'
-                ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
-                : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
-            }`}
-          >
-            <h3 className="font-medium text-[#1E2329] dark:text-white">B-ROLL</h3>
-            <div className="group relative flex-1 overflow-hidden rounded-lg">
-              <video 
-                src="/videos/broll.mp4" 
-                className="h-full w-full object-cover"
-                loop 
-                muted 
-                playsInline
-                controls={false}
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => {
-                  e.currentTarget.pause()
-                  e.currentTarget.currentTime = 0
-                }}
-                onClick={(e) => e.preventDefault()}
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            </div>
-            <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
-              Avatar + Vídeo Stock
-            </p>
-          </button>
+            <button
+              onClick={() => setVideoStyle('broll')}
+              className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
+                videoStyle === 'broll'
+                  ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                  : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
+              }`}
+            >
+              <h3 className="font-medium text-[#1E2329] dark:text-white">B-ROLL</h3>
+              <div className="group relative flex-1 overflow-hidden rounded-lg">
+                <video 
+                  src="/videos/broll.mp4" 
+                  className="h-full w-full object-cover"
+                  loop 
+                  muted 
+                  playsInline
+                  controls={false}
+                  onMouseEnter={(e) => e.currentTarget.play()}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.pause()
+                    e.currentTarget.currentTime = 0
+                  }}
+                  onClick={(e) => e.preventDefault()}
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              </div>
+              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+                Avatar + Vídeo Stock
+              </p>
+            </button>
 
-          <button
-            onClick={() => setVideoStyle('cinematic')}
-            className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
-              videoStyle === 'cinematic'
-                ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
-                : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
-            }`}
-          >
-            <h3 className="font-medium text-[#1E2329] dark:text-white">CINEMATIC</h3>
-            <div className="group relative flex-1 overflow-hidden rounded-lg">
-              <video 
-                src="/videos/cinematic.mp4" 
-                className="h-full w-full object-cover"
-                loop 
-                muted 
-                playsInline
-                controls={false}
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => {
-                  e.currentTarget.pause()
-                  e.currentTarget.currentTime = 0
-                }}
-                onClick={(e) => e.preventDefault()}
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            </div>
-            <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
-              Vídeo Stock Premium
-            </p>
-          </button>
+            <button
+              onClick={() => setVideoStyle('cinematic')}
+              className={`flex flex-col gap-2 rounded-lg border p-3 text-center transition-colors ${
+                videoStyle === 'cinematic'
+                  ? 'border-[#125CC6] bg-[#125CC6]/5 text-[#125CC6] dark:border-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
+                  : 'border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:bg-[#125CC6]/5 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/20'
+              }`}
+            >
+              <h3 className="font-medium text-[#1E2329] dark:text-white">CINEMATIC</h3>
+              <div className="group relative flex-1 overflow-hidden rounded-lg">
+                <video 
+                  src="/videos/cinematic.mp4" 
+                  className="h-full w-full object-cover"
+                  loop 
+                  muted 
+                  playsInline
+                  controls={false}
+                  onMouseEnter={(e) => e.currentTarget.play()}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.pause()
+                    e.currentTarget.currentTime = 0
+                  }}
+                  onClick={(e) => e.preventDefault()}
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              </div>
+              <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+                Vídeo Stock Premium
+              </p>
+            </button>
+          </div>
         </div>
       ),
       isValid: () => videoStyle !== null
@@ -530,9 +532,9 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
       title: 'Configurações Finais',
       subtitle: 'Configure os detalhes finais do seu vídeo.',
       content: (
-        <div className="space-y-8">
+        <div className="mx-auto max-w-6xl space-y-8">
           {/* Tabs */}
-          <nav className="flex justify-center gap-8">
+          <nav className="flex justify-center gap-8 border-b border-[#E6E8EA] dark:border-gray-700">
             {[
               { id: 'format', label: 'Formato' },
               { id: 'captions', label: 'Legendas' },
@@ -541,7 +543,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                className={`relative px-6 py-4 text-sm font-medium transition-colors ${
                   activeTab === tab.id
                     ? 'text-[#125CC6] dark:text-blue-400'
                     : 'text-[#1E2329]/70 hover:text-[#1E2329] dark:text-gray-400 dark:hover:text-gray-200'
@@ -549,139 +551,141 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
               >
                 {tab.label}
                 {activeTab === tab.id && (
-                  <div className="absolute -bottom-[2px] left-0 right-0 h-0.5 rounded-full bg-[#125CC6] dark:bg-blue-400" />
+                  <div className="absolute -bottom-px left-0 right-0 h-0.5 rounded-full bg-[#125CC6] dark:bg-blue-400" />
                 )}
               </button>
             ))}
           </nav>
 
-          {/* Format Tab Content */}
-          {activeTab === 'format' && (
-            <div className="flex justify-center gap-8">
-              {[
-                { id: 'landscape', label: 'Paisagem', ratio: '16:9' },
-                { id: 'portrait', label: 'Retrato', ratio: '9:16' }
-              ].map((format) => (
-                <button
-                  key={format.id}
-                  onClick={() => setVideoFormat(format.id as VideoFormat)}
-                  className={`group flex flex-col items-center gap-4 rounded-xl p-4 transition-all hover:bg-[#125CC6]/5 dark:hover:bg-blue-500/10 ${
-                    videoFormat === format.id ? 'text-[#125CC6] dark:text-blue-400' : 'text-[#1E2329] dark:text-gray-200'
-                  }`}
-                >
-                  <div className={`relative flex items-center justify-center rounded-lg border-2 transition-colors ${
-                    videoFormat === format.id 
-                      ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20' 
-                      : 'border-[#E6E8EA] dark:border-gray-700'
-                  }`}>
-                    {format.id === 'landscape' ? (
-                      <div className="h-32 w-56 p-2">
-                        <div className="h-full w-full rounded bg-current/10" />
-                      </div>
-                    ) : (
-                      <div className="h-56 w-32 p-2">
-                        <div className="h-full w-full rounded bg-current/10" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="text-center">
-                    <p className="font-medium">{format.label}</p>
-                    <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">{format.ratio}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Captions Tab Content */}
-          {activeTab === 'captions' && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-center gap-2">
-                <label className="flex items-center gap-3 rounded-lg border border-[#E6E8EA] px-4 py-2 dark:border-gray-700">
-                  <input
-                    type="checkbox"
-                    checked={showCaptions}
-                    onChange={(e) => setShowCaptions(e.target.checked)}
-                    className="h-4 w-4 rounded border-gray-300 text-[#125CC6] focus:ring-[#125CC6] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-500"
-                  />
-                  <span className="text-sm font-medium text-[#1E2329] dark:text-gray-200">Adicionar Legendas</span>
-                </label>
-              </div>
-
-              {showCaptions && (
-                <div className="relative mx-auto max-w-3xl overflow-hidden rounded-xl border border-[#E6E8EA] bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-                  <div className="grid grid-cols-3 gap-4">
-                    {mockCaptionTemplates.map((template) => (
-                      <button
-                        key={template.id}
-                        onClick={() => setSelectedCaptionTemplate(template.id)}
-                        className={`group relative aspect-[2.42/1] w-full overflow-hidden rounded-lg transition-transform hover:scale-[1.02] ${
-                          selectedCaptionTemplate === template.id
-                            ? 'ring-2 ring-[#125CC6] ring-offset-2 dark:ring-blue-500 dark:ring-offset-gray-800'
-                            : ''
-                        }`}
-                      >
-                        <img
-                          src={template.preview}
-                          alt={template.name}
-                          className="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
-                          <span className="text-sm font-medium text-white">Selecionar</span>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {!showCaptions && (
-                <div className="flex flex-col items-center justify-center space-y-2 py-12 text-center">
-                  <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
-                    Ative as legendas para visualizar os templates disponíveis
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Avatar Tab Content */}
-          {activeTab === 'avatar' && (
-            <div className="mx-auto max-w-3xl space-y-6">
-              <div className="grid grid-cols-2 gap-6">
-                {mockAvatars[videoFormat || 'landscape'].map((avatar) => (
+          <div className="py-6">
+            {/* Format Tab Content */}
+            {activeTab === 'format' && (
+              <div className="flex justify-center gap-12">
+                {[
+                  { id: 'landscape', label: 'Paisagem', ratio: '16:9' },
+                  { id: 'portrait', label: 'Retrato', ratio: '9:16' }
+                ].map((format) => (
                   <button
-                    key={avatar.id}
-                    onClick={() => setShowAvatar(true)}
-                    className={`group relative aspect-video overflow-hidden rounded-xl transition-transform hover:scale-[1.02] ${
-                      showAvatar
-                        ? 'ring-2 ring-[#125CC6] ring-offset-2 dark:ring-blue-500 dark:ring-offset-gray-800'
-                        : 'ring-1 ring-[#E6E8EA] dark:ring-gray-700'
+                    key={format.id}
+                    onClick={() => setVideoFormat(format.id as VideoFormat)}
+                    className={`group flex flex-col items-center gap-4 rounded-xl p-4 transition-all hover:bg-[#125CC6]/5 dark:hover:bg-blue-500/10 ${
+                      videoFormat === format.id ? 'text-[#125CC6] dark:text-blue-400' : 'text-[#1E2329] dark:text-gray-200'
                     }`}
                   >
-                    <video 
-                      src={avatar.preview}
-                      className="h-full w-full object-cover"
-                      loop 
-                      muted 
-                      playsInline
-                      controls={false}
-                      onMouseEnter={(e) => e.currentTarget.play()}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.pause()
-                        e.currentTarget.currentTime = 0
-                      }}
-                      onClick={(e) => e.preventDefault()}
-                      onContextMenu={(e) => e.preventDefault()}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
-                      <span className="text-sm font-medium text-white">Selecionar Avatar</span>
+                    <div className={`relative flex items-center justify-center rounded-lg border-2 transition-colors ${
+                      videoFormat === format.id 
+                        ? 'border-[#125CC6] bg-[#125CC6]/5 dark:border-blue-500 dark:bg-blue-500/20' 
+                        : 'border-[#E6E8EA] dark:border-gray-700'
+                    }`}>
+                      {format.id === 'landscape' ? (
+                        <div className="h-32 w-56 p-2">
+                          <div className="h-full w-full rounded bg-current/10" />
+                        </div>
+                      ) : (
+                        <div className="h-56 w-32 p-2">
+                          <div className="h-full w-full rounded bg-current/10" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="text-center">
+                      <p className="font-medium">{format.label}</p>
+                      <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">{format.ratio}</p>
                     </div>
                   </button>
                 ))}
               </div>
-            </div>
-          )}
+            )}
+
+            {/* Captions Tab Content */}
+            {activeTab === 'captions' && (
+              <div className="space-y-8">
+                <div className="flex items-center justify-center gap-2">
+                  <label className="flex items-center gap-3 rounded-lg border border-[#E6E8EA] px-4 py-2 dark:border-gray-700">
+                    <input
+                      type="checkbox"
+                      checked={showCaptions}
+                      onChange={(e) => setShowCaptions(e.target.checked)}
+                      className="h-4 w-4 rounded border-gray-300 text-[#125CC6] focus:ring-[#125CC6] dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-500"
+                    />
+                    <span className="text-sm font-medium text-[#1E2329] dark:text-gray-200">Adicionar Legendas</span>
+                  </label>
+                </div>
+
+                {showCaptions && (
+                  <div className="relative mx-auto max-w-3xl overflow-hidden rounded-xl border border-[#E6E8EA] bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+                    <div className="grid grid-cols-3 gap-4">
+                      {mockCaptionTemplates.map((template) => (
+                        <button
+                          key={template.id}
+                          onClick={() => setSelectedCaptionTemplate(template.id)}
+                          className={`group relative aspect-[2.42/1] w-full overflow-hidden rounded-lg transition-transform hover:scale-[1.02] ${
+                            selectedCaptionTemplate === template.id
+                              ? 'ring-2 ring-[#125CC6] ring-offset-2 dark:ring-blue-500 dark:ring-offset-gray-800'
+                              : ''
+                          }`}
+                        >
+                          <img
+                            src={template.preview}
+                            alt={template.name}
+                            className="h-full w-full object-cover"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+                            <span className="text-sm font-medium text-white">Selecionar</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {!showCaptions && (
+                  <div className="flex flex-col items-center justify-center space-y-2 py-12 text-center">
+                    <p className="text-sm text-[#1E2329]/70 dark:text-gray-400">
+                      Ative as legendas para visualizar os templates disponíveis
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Avatar Tab Content */}
+            {activeTab === 'avatar' && (
+              <div className="mx-auto max-w-4xl">
+                <div className="grid grid-cols-2 gap-6">
+                  {mockAvatars[videoFormat || 'landscape'].map((avatar) => (
+                    <button
+                      key={avatar.id}
+                      onClick={() => setShowAvatar(true)}
+                      className={`group relative aspect-video overflow-hidden rounded-xl transition-transform hover:scale-[1.02] ${
+                        showAvatar
+                          ? 'ring-2 ring-[#125CC6] ring-offset-2 dark:ring-blue-500 dark:ring-offset-gray-800'
+                          : 'ring-1 ring-[#E6E8EA] dark:ring-gray-700'
+                      }`}
+                    >
+                      <video 
+                        src={avatar.preview}
+                        className="h-full w-full object-cover"
+                        loop 
+                        muted 
+                        playsInline
+                        controls={false}
+                        onMouseEnter={(e) => e.currentTarget.play()}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.pause()
+                          e.currentTarget.currentTime = 0
+                        }}
+                        onClick={(e) => e.preventDefault()}
+                        onContextMenu={(e) => e.preventDefault()}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+                        <span className="text-sm font-medium text-white">Selecionar Avatar</span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       ),
       isValid: () => videoFormat !== null
@@ -706,73 +710,67 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
   const currentStepData = steps[currentStep - 1]
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      containerClassName="max-w-3xl"
-      title={`Novo Anúncio - ${projectName}`}
-    >
-      <div className="space-y-8">
-        <StepHeader
-          currentStep={currentStep}
-          totalSteps={steps.length}
-          title={steps[currentStep - 1].title}
-          subtitle={steps[currentStep - 1].subtitle}
-        />
+    <>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        containerClassName="max-w-none"
+        title={`Novo Anúncio - ${projectName}`}
+        footer={
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => {
+                setDirection(-1)
+                setCurrentStep((prev) => prev - 1)
+              }}
+              disabled={currentStep === 1}
+              className="rounded-lg px-6 py-2.5 text-sm font-medium text-[#1E2329] transition-colors hover:bg-[#E6E8EA] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent dark:text-gray-200 dark:hover:bg-gray-700"
+            >
+              Voltar
+            </button>
 
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={currentStep}
-            initial={{ x: 10 * direction, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -10 * direction, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="min-h-[300px]"
-          >
-            {steps[currentStep - 1].content}
-          </motion.div>
-        </AnimatePresence>
+            <button
+              onClick={() => {
+                if (currentStep === steps.length) {
+                  handleClose()
+                  return
+                }
 
-        <div className="flex items-center justify-between pt-4">
-          <button
-            onClick={() => {
-              setDirection(-1)
-              setCurrentStep((prev) => prev - 1)
-            }}
-            disabled={currentStep === 1}
-            className="flex items-center gap-2 rounded-lg border border-[#E6E8EA] px-4 py-2 text-sm text-[#1E2329] transition-colors hover:border-[#125CC6] hover:text-[#125CC6] disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Anterior
-          </button>
+                if (currentStepData.isValid()) {
+                  setDirection(1)
+                  setCurrentStep((prev) => prev + 1)
+                }
+              }}
+              disabled={!currentStepData.isValid()}
+              className="rounded-lg bg-[#125CC6] px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#125CC6]/90 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-600/90"
+            >
+              {currentStep === steps.length ? 'Concluir' : 'Próximo'}
+            </button>
+          </div>
+        }
+      >
+        <div className="flex flex-col">
+          <StepHeader
+            currentStep={currentStep}
+            totalSteps={steps.length}
+            title={steps[currentStep - 1].title}
+            subtitle={steps[currentStep - 1].subtitle}
+          />
 
-          <button
-            onClick={() => {
-              if (currentStep === steps.length) {
-                handleClose()
-                return
-              }
-              setDirection(1)
-              setCurrentStep((prev) => prev + 1)
-            }}
-            disabled={!steps[currentStep - 1].isValid()}
-            className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-              currentStep === steps.length
-                ? 'bg-[#125CC6] text-white hover:bg-[#125CC6]/90 dark:bg-blue-500 dark:hover:bg-blue-600'
-                : 'border border-[#E6E8EA] text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6] dark:border-gray-700 dark:text-gray-200 dark:hover:border-blue-500 dark:hover:text-blue-400'
-            } disabled:cursor-not-allowed disabled:opacity-50`}
-          >
-            {currentStep === steps.length ? (
-              'Finalizar'
-            ) : (
-              <>
-                Próximo
-                <ArrowRight className="h-4 w-4" />
-              </>
-            )}
-          </button>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, x: direction === 1 ? 20 : -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: direction === 1 ? -20 : 20 }}
+              transition={{ duration: 0.2 }}
+              className="mt-8 flex-1"
+            >
+              {currentStepData.content}
+            </motion.div>
+          </AnimatePresence>
         </div>
-      </div>
+      </Modal>
 
       {/* Modal de Confirmação de Exclusão */}
       <Modal
@@ -780,12 +778,8 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
         onClose={() => setShowDeleteConfirm(null)}
         title="Confirmar Exclusão"
         containerClassName="max-w-md"
-      >
-        <div className="space-y-4">
-          <p className="text-[#1E2329] dark:text-white">
-            Tem certeza que deseja excluir esta frase?
-          </p>
-          <div className="flex justify-end gap-3 pt-4">
+        footer={
+          <div className="flex justify-end gap-3">
             <button
               onClick={() => setShowDeleteConfirm(null)}
               className="rounded-lg border border-[#E6E8EA] px-4 py-2 text-sm text-[#1E2329] hover:border-[#125CC6] hover:text-[#125CC6] dark:border-gray-700 dark:text-gray-200"
@@ -799,8 +793,12 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
               Excluir
             </button>
           </div>
-        </div>
+        }
+      >
+        <p className="text-[#1E2329] dark:text-white">
+          Tem certeza que deseja excluir esta frase?
+        </p>
       </Modal>
-    </Modal>
+    </>
   )
 } 

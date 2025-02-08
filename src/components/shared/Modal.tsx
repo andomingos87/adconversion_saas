@@ -10,9 +10,17 @@ interface ModalProps {
   title?: string
   children: React.ReactNode
   containerClassName?: string
+  footer?: React.ReactNode
 }
 
-export function Modal({ isOpen, onClose, title, children, containerClassName = 'max-w-2xl' }: ModalProps) {
+export function Modal({ 
+  isOpen, 
+  onClose, 
+  title, 
+  children, 
+  containerClassName = 'max-w-2xl',
+  footer 
+}: ModalProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -44,33 +52,40 @@ export function Modal({ isOpen, onClose, title, children, containerClassName = '
             onClick={onClose}
           />
 
-          <div className="fixed inset-0 z-[9999] overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className={`relative w-full rounded-lg bg-white p-6 shadow-xl ring-1 ring-black/5 dark:bg-gray-800 dark:ring-white/10 ${containerClassName}`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {title && (
-                  <div className="mb-6 flex items-center justify-between">
-                    <h2 className="text-lg font-medium text-[#1E2329] dark:text-white">{title}</h2>
-                    <button
-                      onClick={onClose}
-                      className="rounded-lg p-2 text-[#1E2329]/70 transition-colors hover:bg-[#E6E8EA] hover:text-[#1E2329] dark:text-gray-400 dark:hover:bg-gray-700/80 dark:hover:text-white"
-                    >
-                      <X className="h-5 w-5" />
-                    </button>
-                  </div>
-                )}
+          <div className="fixed inset-0 z-[99999] flex items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className={`relative flex h-screen w-full flex-col bg-white shadow-xl ring-1 ring-black/5 dark:bg-gray-800 dark:ring-white/10 ${containerClassName}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              {title && (
+                <header className="flex items-center justify-between border-b border-[#E6E8EA] px-6 py-4 dark:border-gray-700">
+                  <h2 className="text-lg font-medium text-[#1E2329] dark:text-white">{title}</h2>
+                  <button
+                    onClick={onClose}
+                    className="rounded-lg p-2 text-[#1E2329]/70 transition-colors hover:bg-[#E6E8EA] hover:text-[#1E2329] dark:text-gray-400 dark:hover:bg-gray-700/80 dark:hover:text-white"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </header>
+              )}
 
-                <div className="max-h-[calc(100vh-200px)] overflow-y-auto">
-                  {children}
-                </div>
-              </motion.div>
-            </div>
+              {/* Content */}
+              <main className="flex-1 overflow-y-auto px-6 py-4">
+                {children}
+              </main>
+
+              {/* Footer */}
+              {footer && (
+                <footer className="border-t border-[#E6E8EA] bg-white px-6 py-4 dark:border-gray-700 dark:bg-gray-800">
+                  {footer}
+                </footer>
+              )}
+            </motion.div>
           </div>
         </>
       )}

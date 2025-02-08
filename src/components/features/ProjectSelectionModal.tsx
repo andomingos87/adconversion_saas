@@ -79,18 +79,19 @@ export function ProjectSelectionModal({
           ? 'Selecione a Plataforma'
           : 'Selecione o Idioma'
       }
+      containerClassName="max-w-2xl h-auto my-8"
     >
-      <div className="space-y-6">
+      <div className="flex flex-col space-y-6">
         {step === 'select' && (
           <>
-            <div className="grid gap-4">
+            <div className="grid max-h-[60vh] gap-4 overflow-y-auto pr-2">
               {projects.map((project) => (
                 <div
                   key={project.id}
                   className={`flex cursor-pointer items-center gap-4 rounded-lg border p-4 transition-colors ${
                     selectedProject?.id === project.id
                       ? 'border-[#125CC6] bg-[#125CC6]/5'
-                      : 'border-[#E6E8EA] dark:border-gray-700 hover:border-[#125CC6]'
+                      : 'border-[#E6E8EA] hover:border-[#125CC6] dark:border-gray-700'
                   }`}
                   onClick={() => setSelectedProject(project)}
                 >
@@ -112,7 +113,7 @@ export function ProjectSelectionModal({
               ))}
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-2">
               <Button
                 variant="secondary"
                 className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
@@ -149,7 +150,7 @@ export function ProjectSelectionModal({
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-2">
               <Button
                 variant="secondary" 
                 className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
@@ -221,7 +222,7 @@ export function ProjectSelectionModal({
               </button>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-2">
               <Button
                 variant="secondary"
                 className="text-gray-500 hover:text-[#125CC6] dark:text-gray-300 dark:hover:text-[#125CC6]"
@@ -293,7 +294,7 @@ export function ProjectSelectionModal({
               </button>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-2">
               <Button
                 variant="secondary"
                 onClick={() => setStep('create')}
