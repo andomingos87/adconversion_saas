@@ -11,6 +11,7 @@ interface ModalProps {
   children: React.ReactNode
   containerClassName?: string
   footer?: React.ReactNode
+  fullHeight?: boolean
 }
 
 export function Modal({ 
@@ -19,7 +20,8 @@ export function Modal({
   title, 
   children, 
   containerClassName = 'max-w-2xl',
-  footer 
+  footer,
+  fullHeight = false
 }: ModalProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -58,7 +60,7 @@ export function Modal({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className={`relative flex h-screen w-full flex-col bg-white shadow-xl ring-1 ring-black/5 dark:bg-gray-800 dark:ring-white/10 ${containerClassName}`}
+              className={`relative ${fullHeight ? 'h-screen' : 'min-h-[200px] max-h-[90vh]'} w-full flex flex-col bg-white shadow-xl ring-1 ring-black/5 dark:bg-gray-800 dark:ring-white/10 ${containerClassName}`}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}

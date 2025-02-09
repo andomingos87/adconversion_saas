@@ -716,6 +716,7 @@ export function AdWizard({ isOpen, onClose, projectId, projectName }: AdWizardPr
         onClose={onClose}
         containerClassName="max-w-none"
         title={`Novo Anúncio - ${projectName}`}
+        fullHeight={true}
         footer={
           <div className="flex items-center justify-between">
             <button

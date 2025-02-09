@@ -79,7 +79,7 @@ export function ProjectSelectionModal({
           ? 'Selecione a Plataforma'
           : 'Selecione o Idioma'
       }
-      containerClassName="max-w-2xl h-auto my-8"
+      containerClassName="w-[95%] max-w-3xl my-4"
     >
       <div className="flex flex-col space-y-6">
         {step === 'select' && (
@@ -91,7 +91,7 @@ export function ProjectSelectionModal({
               </p>
             </div>
 
-            <div className="grid max-h-[60vh] gap-4 overflow-y-auto pr-2">
+            <div className="grid max-h-[50vh] gap-4 overflow-y-auto pr-2">
               {projects.map((project) => (
                 <div
                   key={project.id}
