@@ -1,15 +1,13 @@
-import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import { createBrowserClient } from '@supabase/ssr'
-import { useRouter } from 'next/router'
+import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default function ResetPassword() {
   const [email, setEmail] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
 
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -38,133 +36,139 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-gray-50 py-12 dark:bg-gray-900 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <Image
-          src="/logo-adconversion-dark.png"
-          alt="Logo"
-          width={200}
-          height={50}
-          className="mx-auto block dark:hidden"
-        />
-        <Image
-          src="/logo-adconversion-light.png"
-          alt="Logo"
-          width={200}
-          height={50}
-          className="mx-auto hidden dark:block"
-        />
+    <div className="grid min-h-screen grid-cols-1 bg-white md:grid-cols-2">
+      {/* Lado Esquerdo - Formulário */}
+      <div className="flex flex-col justify-center px-4 py-12 sm:px-6 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <Image
+            src="/logo-adconversion-dark.png"
+            alt="Logo"
+            width={180}
+            height={40}
+            className="mx-auto"
+          />
+          <h2 className="mt-6 text-center text-2xl font-semibold tracking-tight text-gray-900">
+            Recuperar senha
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Digite seu email para receber um link de recuperação
+          </p>
+        </div>
+
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="px-4 py-8 sm:px-10">
+            {success ? (
+              <div className="text-center">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                  <svg
+                    className="h-6 w-6 text-green-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                </div>
+                <h3 className="mt-3 text-lg font-medium text-gray-900">
+                  Email enviado!
+                </h3>
+                <p className="mt-2 text-sm text-gray-500">
+                  Verifique sua caixa de entrada para redefinir sua senha.
+                </p>
+                <div className="mt-6">
+                  <Link
+                    href="/auth/signin"
+                    className="font-semibold text-blue-600 hover:text-blue-500"
+                  >
+                    Voltar para login
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Email
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="block w-full appearance-none rounded-lg border border-gray-300 px-3 py-2 shadow-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                      placeholder="Digite seu email"
+                    />
+                  </div>
+                </div>
+
+                {error && (
+                  <div className="rounded-md bg-red-50 p-4">
+                    <div className="flex">
+                      <div className="ml-3">
+                        <h3 className="text-sm font-medium text-red-800">
+                          {error}
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="flex w-full justify-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50"
+                  >
+                    {loading ? 'Enviando...' : 'Enviar email de recuperação'}
+                  </button>
+                </div>
+
+                <div className="text-center">
+                  <Link
+                    href="/auth/signin"
+                    className="text-sm font-semibold text-blue-600 hover:text-blue-500"
+                  >
+                    Voltar para login
+                  </Link>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white px-4 py-8 shadow dark:bg-gray-800 sm:rounded-lg sm:px-10">
-          {success ? (
-            <div>
-              <div className="rounded-md bg-green-50 p-4 dark:bg-green-900/30">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg
-                      className="h-5 w-5 text-green-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-green-800 dark:text-green-200">
-                      Email enviado com sucesso!
-                    </h3>
-                    <div className="mt-2 text-sm text-green-700 dark:text-green-300">
-                      <p>
-                        Verifique sua caixa de entrada para redefinir sua senha.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                <Link
-                  href="/auth/signin"
-                  className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
-                >
-                  Voltar para o login
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-                >
-                  Email
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full appearance-none rounded-md border text-gray-500 border-gray-300 px-3 py-2 shadow-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 sm:text-sm"
-                  />
-                </div>
-              </div>
-
-              {error && (
-                <div className="rounded-md bg-red-50 p-4 dark:bg-red-900/30">
-                  <div className="flex">
-                    <div className="flex-shrink-0">
-                      <svg
-                        className="h-5 w-5 text-red-400"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div className="ml-3">
-                      <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
-                        {error}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 dark:bg-blue-500 dark:hover:bg-blue-600"
-                >
-                  {loading ? 'Enviando...' : 'Enviar email de recuperação'}
-                </button>
-              </div>
-
-              <div className="text-center">
-                <Link
-                  href="/auth/signin"
-                  className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
-                >
-                  Voltar para o login
-                </Link>
-              </div>
-            </form>
-          )}
+      {/* Lado Direito - Imagem */}
+      <div className="hidden md:block">
+        <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800">
+          <div className="absolute inset-0">
+            <div className="h-full w-full" style={{
+              backgroundImage: "url('/auth-pattern.svg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              opacity: 0.4
+            }} />
+          </div>
+          <div className="relative flex h-full items-center justify-center">
+            <Image
+              src="/logo-adconversion-light.png"
+              alt="Logo"
+              width={280}
+              height={60}
+              className="opacity-50"
+            />
+          </div>
         </div>
       </div>
     </div>

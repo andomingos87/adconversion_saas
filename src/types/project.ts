@@ -1,8 +1,12 @@
+export type Language = 'pt-BR' | 'en'
+
 export interface Project {
-  id: number
+  id: string
   name: string
+  language: Language
   thumbnail: string
-  videoCount: number
+  created_at: string
+  user_id: string
 }
 
 export interface Video {

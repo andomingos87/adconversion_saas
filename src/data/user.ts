@@ -1,12 +1,19 @@
 import { User } from '@/types/user'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+
+const supabase = createClientComponentClient()
+const { data: { user } } = await supabase.auth.getUser()
+const { data: profiles } = await supabase.from('profiles').select('*').eq('id', user?.id).single()
 
 export const mockUser: User = {
   id: 1,
-  name: 'John Doe',
-  email: 'john.doe@example.com',
-  avatar: 'https://picsum.photos/seed/john/200',
-  phone: '+55 (11) 98765-4321',
-  company: 'Tech Solutions Inc.',
+  name: profiles?.full_name || 'Sem nome',
+  email: profiles?.email || 'sem@email.com',
+  avatar: profiles?.avatar_url || 'https://picsum.photos/seed/john/200',
+  phone: profiles?.phone || '+55 (11) 99999-9999',
+  company: profiles?.company || 'Sem empresa',
+
+
   plan: {
     type: 'premium',
     name: 'Premium',

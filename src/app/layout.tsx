@@ -21,7 +21,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="light" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen bg-white transition-colors duration-300 dark:bg-gray-900`}>
-        <ThemeProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <AuthProvider>
             <Sidebar />
             <Header />

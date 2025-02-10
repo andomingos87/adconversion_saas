@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Modal } from '@/components/shared/Modal'
 import { Project } from '@/types/project'
 import { projects } from '@/data/projects'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import Image from 'next/image'
+import { useProjects } from '@/hooks/useProjects'
+import { Language } from '@/types/project'
 
 interface ProjectSelectionModalProps {
   isOpen: boolean
@@ -15,7 +17,6 @@ interface ProjectSelectionModalProps {
 }
 
 type Platform = 'meta' | 'youtube'
-type Language = 'pt-BR' | 'en'
 
 export function ProjectSelectionModal({
   isOpen,
@@ -27,8 +28,22 @@ export function ProjectSelectionModal({
   const [projectName, setProjectName] = useState('')
   const [platform, setPlatform] = useState<Platform | null>(null)
   const [language, setLanguage] = useState<Language | null>(null)
+  const [projects, setProjects] = useState<Project[]>([])
+  
+  const { createProject, getProjects, loading, error } = useProjects()
 
-  const handleNext = () => {
+  useEffect(() => {
+    if (isOpen) {
+      loadProjects()
+    }
+  }, [isOpen])
+
+  const loadProjects = async () => {
+    const projectsList = await getProjects()
+    setProjects(projectsList)
+  }
+
+  const handleNext = async () => {
     if (step === 'select') {
       if (selectedProject) {
         setStep('platform')
@@ -44,15 +59,11 @@ export function ProjectSelectionModal({
       }
     } else if (step === 'language') {
       if (language) {
-        // Aqui você pode criar o projeto com o nome e idioma selecionados
-        const newProject: Project = {
-          id: projects.length + 1,
-          name: projectName,
-          thumbnail: '/images/projects/default.jpg',
-          videoCount: 0
+        const newProject = await createProject(projectName, language)
+        if (newProject) {
+          onSelectProject(newProject, language)
+          handleClose()
         }
-        onSelectProject(newProject, language)
-        handleClose()
       }
     }
   }
